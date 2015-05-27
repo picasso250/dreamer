@@ -1,14 +1,21 @@
 <?php
 
-function all_thread()
+function all_thread($node_id = null)
 {
     global $db;
+    $values = [];
+    $where = '';
+    if ($node_id) {
+        $where .= " WHERE node_id=? ";
+        $values[] = $node_id;
+    }
     $sql = "SELECT t.*,u.name username,u.email, n.name node_name
         from thread t 
         inner join user u on u.id=t.user_id 
-        left join node n on n.id=t.node_id 
+        left join node n on n.id=t.node_id
+        $where
         order by action_time desc limit 111";
-    return $list = $db->queryAll($sql);
+    return $list = $db->queryAll($sql, $values);
 }
 function get_thread($id)
 {

@@ -6,6 +6,11 @@
 	<div>请先登录再发言</div>
 <?php endif ?>
 
+<div>
+<?php foreach ($nodes as $node): ?>
+	<a href="?<?= http_build_query(['tab' => $node['id']]) ?>"><?= $node['name'] ?></a>
+<?php endforeach ?>
+</div>
 <ul id="MainList">
 <?php include 'thread_list.html' ?>
 </ul>

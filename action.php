@@ -4,8 +4,11 @@ namespace action;
 
 function index()
 {
-    $list = \all_thread();
-    render(compact('list'));
+    global $db;
+    $tab = isset($_GET['tab']) ? $_GET['tab'] : null;
+    $list = \all_thread($tab);
+    $nodes = $db->queryAll("SELECT * from node where pid=0 limit 111");
+    render(compact('list', 'nodes'));
 }
 function thread_list()
 {
@@ -181,6 +184,6 @@ function change_password()
 function post_new()
 {
     global $db;
-    $nodes = $db->queryAll("SELECT * from node limit 121");
+    $nodes = $db->get_all_node(100);
     render(compact('nodes'));
 }
