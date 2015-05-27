@@ -1,4 +1,4 @@
-<?php foreach ($comments as $comment): ?>
+<?php foreach ($comments as $i => $comment): ?>
 	<li>
 		<a href="/user/<?= $comment['user_id'] ?>"><?= (user_show_name($comment)) ?></a>
 		<div><?= htmlspecialchars($comment['content']) ?></div>
