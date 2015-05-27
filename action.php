@@ -26,6 +26,29 @@ function login()
 {
     render();
 }
+function login_check()
+{
+    if (empty($_POST['name'])) {
+        echo_json_exit(1, 'no name');
+    }
+    $name = $_POST['name'];
+    if (empty($_POST['password'])) {
+        echo_json_exit(1, 'no password');
+    }
+    $password = $_POST['password'];
+
+    global $db;
+    $sql = "SELECT * from user where name=:name or email=:name limit 1";
+    $user = $db->queryRow($sql, compact('name'));
+    if (empty($user)) {
+        echo_json_exit(2, 'no user');
+    }
+    if (($user['password']) !== sha1($password)) {
+        echo_json_exit(3, 'password not correct');
+    }
+    user_id($user['id']);
+    echo_json_exit(0);
+}
 function logout()
 {
     user_id(0);
