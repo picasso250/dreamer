@@ -16,4 +16,5 @@ $dbc = $config['db'];
 $db = new \xiaochi\DB($dbc['dsn'], $dbc['username'], $dbc['password']);
 
 header('Content-Type: text/html; charset=utf-8');
-$router();
+$func = "\\action\\$router";
+$func();

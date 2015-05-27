@@ -1,5 +1,7 @@
 <?php
 
+namespace action;
+
 function index()
 {
     include 'view/index.html';
