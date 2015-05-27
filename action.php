@@ -4,6 +4,9 @@ namespace action;
 
 function index()
 {
+    global $db;
+    $sql = "SELECT * from thread order by action_time desc limit 111";
+    $list = $db->queryAll($sql);
     include 'view/index.html';
 }
 function post()

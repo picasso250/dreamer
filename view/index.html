@@ -15,5 +15,14 @@
 	<br>
 	<button>ok</button>
 </form>
+<ul>
+	<?php foreach ($list as $thread): ?>
+		<li>
+			<h3><?= htmlspecialchars($thread['title']) ?></h3>
+			<div><?= htmlspecialchars($thread['content']); ?></div>
+			<div><?= $thread['create_time'] ?></div>
+		</li>
+	<?php endforeach ?>
+</ul>
 </body>
 </html>
