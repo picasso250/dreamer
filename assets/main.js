@@ -1,6 +1,16 @@
 $(function () {
-	var alert = $('.alert');
-	var postForm = $('form.ajax').on('submit', function (e) {
+	ajax_form('form.ajax', function (ret) {
+		if (ret.code === 0) {
+			if (ret.data && ret.data.url) {
+				location.href = ret.data.url;
+				return;
+			}
+		}
+	})
+});
+function ajax_form(form, callback)
+{
+	var postForm = $(form).on('submit', function (e) {
 		e.preventDefault();
 		var $this = $(this);
 		var $btn = $(this).find('button[type=submit]');
@@ -8,14 +18,10 @@ $(function () {
 		$btn.text('...');
 		console.log(old);
 		$.post($this.attr('action'), $this.serialize(), function (ret) {
-			if (ret.code === 0) {
-				if (ret.data && ret.data.url) {
-					location.href = ret.data.url;
-					return;
-				}
+			if (false === callback(ret)) {
+				return
 			}
 			$btn.text(old);
-			alert.removeClass('alert-hidden').text(ret.message);
 		}, 'json');
 	});
-});
+}

@@ -10,23 +10,16 @@
 	<div>请先登录再发言</div>
 <?php endif ?>
 
+<ul id="MainList">
 <?php include 'thread_list.html' ?>
+</ul>
 
 <script type="text/javascript">
 $(function () {
-	var alert = $('.alert');
-	var postForm = $('form').on('submit', function (e) {
-		e.preventDefault();
-		var $this = $(this);
-		var $btn = $(this).find('button[type=submit]');
-		var old = $btn.text();
-		$btn.text('...');
-		$.post($this.attr('action'), $this.serialize(), function (ret) {
-			if (ret.code === 0) {
-				$('#MainList').load('thread_list');
-			}
-			$btn.text(old);
-		}, 'json');
-	});
+	ajax_form('form', function (ret) {
+		if (ret.code === 0) {
+			$('#MainList').load('thread_list');
+		}
+	})
 });
 </script>

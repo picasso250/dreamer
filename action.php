@@ -60,8 +60,23 @@ function logout()
 }
 function thread($id)
 {
-    global $db;
-    $sql = "SELECT t.*,u.name username, u.email from thread t join user u on u.id=t.user_id where t.id=?";
-    $thread = $db->queryRow($sql, [$id]);
-    render(compact('thread'));
+    $thread = get_thread($id);
+    $comments = all_comment($id);
+    render(compact('thread', 'comments'));
+}
+function post_comment($t_id)
+{
+    if (empty($_POST['content'])) {
+        echo_json_exit(1, 'empty content');
+    }
+    $content = $_POST['content'];
+    $data = compact('t_id', 'content');
+    $data['user_id'] = user_id();
+    $id = $db->insert('comment', $data);
+    echo_json_exit(compact('id'));
+}
+function comment_list($t_id)
+{
+    $comments = all_comment($id);
+    include 'view/comment_list.html';
 }

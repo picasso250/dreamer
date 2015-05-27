@@ -20,3 +20,11 @@ INSERT INTO `dreamer`.`user` (`name`, `password`)
  VALUES ('xiaochi', sha1('xiaochi'));
 ALTER TABLE `dreamer`.`thread` 
 ADD COLUMN `user_id` INT UNSIGNED NOT NULL AFTER `action_time`;
+CREATE TABLE `dreamer`.`comment` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `content` TEXT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  `create_time` TIMESTAMP NOT NULL,
+  PRIMARY KEY (`id`));
+ALTER TABLE `dreamer`.`comment` 
+ADD COLUMN `t_id` INT UNSIGNED NOT NULL AFTER `create_time`;

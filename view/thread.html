@@ -1,1 +1,25 @@
-ssss
+<div>
+	<h3><?= htmlspecialchars($thread['title']) ?></h3>
+	<div><?= htmlspecialchars($thread['create_time']) ?></div>
+	<div><?= htmlspecialchars($thread['content']) ?></div>
+</div>
+
+<form action="/post_comment/<?= $thread['id'] ?>">
+	<textarea name="content"></textarea>
+	<button type="submit">评论</button>
+</form>
+
+<h3>评论</h3>
+<ul id="MainList">
+<?php include 'comment_list.html' ?>
+</ul>
+
+<script type="text/javascript">
+$(function () {
+	ajax_form('form', function (ret) {
+		if (ret.code === 0) {
+			$('#MainList').load("/comment_list/<?= $thread['id'] ?>");
+		}
+	})
+});
+</script>

@@ -1,9 +1,7 @@
-<ul id="MainList">
-	<?php foreach ($list as $thread): ?>
-		<li>
-			<h3><a href="/thread/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['title']) ?></a></h3>
-			<div><?= htmlspecialchars($thread['content']); ?></div>
-			<div><?= $thread['create_time'] ?></div>
-		</li>
-	<?php endforeach ?>
-</ul>
+<?php foreach ($list as $thread): ?>
+	<li>
+		<h3><a href="/thread/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['title']) ?></a></h3>
+		<div><?= htmlspecialchars($thread['content']); ?></div>
+		<div><?= $thread['create_time'] ?></div>
+	</li>
+<?php endforeach ?>

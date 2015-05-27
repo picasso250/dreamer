@@ -1,0 +1,6 @@
+<?php foreach ($comments as $comment): ?>
+	<li>
+		<div><?= htmlspecialchars($comment['content']) ?></div>
+		<div><?= $comment['create_time'] ?></div>
+	</li>
+<?php endforeach ?>
