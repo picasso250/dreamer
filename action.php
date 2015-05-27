@@ -4,10 +4,13 @@ namespace action;
 
 function index()
 {
-    global $db;
-    $sql = "SELECT * from thread order by action_time desc limit 111";
-    $list = $db->queryAll($sql);
+    $list = \all_thread();
     render(compact('list'));
+}
+function thread_list()
+{
+    $list = \all_thread();
+    include 'view/thread_list.html';
 }
 function post()
 {

@@ -1,17 +1,28 @@
-
-<form method="post" action="post" class="ajax">
+<form method="post" action="post" class="">
 	<input name="title">
 	<br>
 	<textarea name="content"></textarea>
 	<br>
 	<button>ok</button>
 </form>
-<ul>
-	<?php foreach ($list as $thread): ?>
-		<li>
-			<h3><?= htmlspecialchars($thread['title']) ?></h3>
-			<div><?= htmlspecialchars($thread['content']); ?></div>
-			<div><?= $thread['create_time'] ?></div>
-		</li>
-	<?php endforeach ?>
-</ul>
+
+<?php include 'thread_list.html' ?>
+
+<script type="text/javascript">
+$(function () {
+	var alert = $('.alert');
+	var postForm = $('form').on('submit', function (e) {
+		e.preventDefault();
+		var $this = $(this);
+		var $btn = $(this).find('button[type=submit]');
+		var old = $btn.text();
+		$btn.text('...');
+		$.post($this.attr('action'), $this.serialize(), function (ret) {
+			if (ret.code === 0) {
+				$('#MainList').load('thread_list');
+			}
+			$btn.text(old);
+		}, 'json');
+	});
+});
+</script>
