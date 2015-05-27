@@ -8,7 +8,7 @@ function index()
     $tab = isset($_GET['tab']) ? $_GET['tab'] : null;
     $list = \all_thread($tab);
     $nodes = $db->queryAll("SELECT * from node where pid=0 limit 111");
-    render(compact('list', 'nodes'));
+    render(compact('list', 'nodes', 'tab'));
 }
 function thread_list()
 {

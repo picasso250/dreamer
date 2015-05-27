@@ -6,3 +6,16 @@
 	color: grey;
 	border-radius: 3px;
 }
+.tab {
+	width: 3em;
+	padding: 3px 4px;
+	border-radius: 3px;
+	display: inline-block;
+	text-align: center;
+}
+.tab:hover {
+	background-color: #eee;
+}
+.tab.on {
+	background-color: grey;
+}

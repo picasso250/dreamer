@@ -8,7 +8,9 @@
 
 <div>
 <?php foreach ($nodes as $node): ?>
-	<a href="?<?= http_build_query(['tab' => $node['id']]) ?>"><?= $node['name'] ?></a>
+	<a href="?<?= http_build_query(['tab' => $node['id']]) ?>"
+		class="tab <?php if ($tab === $node['id']): ?>on<?php endif ?>"
+		><?= $node['name'] ?></a>
 <?php endforeach ?>
 </div>
 <ul id="MainList">
