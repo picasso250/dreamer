@@ -18,3 +18,5 @@ ALTER TABLE `dreamer`.`user`
 ADD COLUMN `password` VARCHAR(145) NOT NULL AFTER `create_time`;
 INSERT INTO `dreamer`.`user` (`name`, `password`)
  VALUES ('xiaochi', sha1('xiaochi'));
+ALTER TABLE `dreamer`.`thread` 
+ADD COLUMN `user_id` INT UNSIGNED NOT NULL AFTER `action_time`;

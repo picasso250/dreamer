@@ -21,6 +21,7 @@ function post()
     $title = $_POST['title'];
     $content = isset($_POST['content']) ? $_POST['content'] : null;
     $data = compact('title', 'content');
+    $data['user_id'] = user_id();
     $data['action_time'] = $db::timestamp();
     $id = $db->insert('thread', $data);
     \echo_json_exit(compact('id'));
@@ -56,4 +57,11 @@ function logout()
 {
     user_id(0);
     header('Location: /');
+}
+function thread($id)
+{
+    global $db;
+    $sql = "SELECT t.*,u.name username, u.email from thread t join user u on u.id=t.user_id where t.id=?";
+    $thread = $db->queryRow($sql, [$id]);
+    render(compact('thread'));
 }

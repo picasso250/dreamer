@@ -12,10 +12,10 @@
 	<?php global $user; if (user_id()): ?>
 		<div>
 			Welcome, <?= $user['name'] ?: $user['email'] ?>
-			<a href="logout">logout</a>
+			<a href="/logout">logout</a>
 		</div>
 	<?php else: ?>
-		<a href="login">login</a>
+		<a href="/login">login</a>
 	<?php endif ?>
 </header>
 <?php include "$GLOBALS[router].html" ?>

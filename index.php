@@ -8,10 +8,16 @@ require 'action.php';
 
 $REQUEST_URI = $_SERVER['REQUEST_URI'];
 $path = explode('?', $REQUEST_URI)[0];
+$args = [];
 if ($path === '/') {
     $router = 'index';
+} elseif (preg_match('#^/(\w+)$#', $path, $matches)) {
+    $router = $matches[1];
+} elseif (preg_match('#^/(\w+)/(\d+)$#', $path, $matches)) {
+    $router = $matches[1];
+    $args[] = $matches[2];
 } else {
-    $router = substr($path, 1);
+    $router = 'page404';
 }
 
 $config = require 'config.php';
@@ -27,4 +33,4 @@ if ($user_id) {
 
 header('Content-Type: text/html; charset=utf-8');
 $func = "\\action\\$router";
-$func();
+call_user_func_array($func, $args);

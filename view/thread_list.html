@@ -1,7 +1,7 @@
 <ul id="MainList">
 	<?php foreach ($list as $thread): ?>
 		<li>
-			<h3><?= htmlspecialchars($thread['title']) ?></h3>
+			<h3><a href="/thread/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['title']) ?></a></h3>
 			<div><?= htmlspecialchars($thread['content']); ?></div>
 			<div><?= $thread['create_time'] ?></div>
 		</li>
