@@ -7,7 +7,7 @@ function index()
     global $db;
     $sql = "SELECT * from thread order by action_time desc limit 111";
     $list = $db->queryAll($sql);
-    include 'view/index.html';
+    render(compact('list'));
 }
 function post()
 {
@@ -17,6 +17,17 @@ function post()
     }
     $title = $_POST['title'];
     $content = isset($_POST['content']) ? $_POST['content'] : null;
-    $id = $db->insert('thread', compact('title', 'content'));
+    $data = compact('title', 'content');
+    $data['action_time'] = $db::timestamp();
+    $id = $db->insert('thread', $data);
     \echo_json_exit(compact('id'));
+}
+function login()
+{
+    render();
+}
+function logout()
+{
+    user_id(0);
+    header('Location: /');
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>x</title>
+	<script type="text/javascript" src="/assets/jquery-2.0.3.js"></script>
+	<script type="text/javascript" src="/assets/main.js"></script>
+</head>
+<body>
+<header>
+	<h1>梦想家</h1>
+	<?php if (user_id()): ?>
+		<a href="logout">logout</a>
+	<?php else: ?>
+		<a href="login">login</a>
+	<?php endif ?>
+</header>
+<?php include "$GLOBALS[router].html" ?>
+</body>
+</html>

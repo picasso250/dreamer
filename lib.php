@@ -11,3 +11,8 @@ function echo_json_exit($code, $msg = 'ok')
     echo json_encode($res);
     exit;
 }
+function render($data = [])
+{
+    extract($data);
+    include "view/layout.html";
+}
