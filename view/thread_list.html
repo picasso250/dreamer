@@ -1,8 +1,8 @@
 <?php foreach ($list as $thread): ?>
 	<li>
 		<h3><a href="/thread/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['title']) ?></a></h3>
+		<div class="label"><?= htmlspecialchars($thread['node_name']); ?></div>
 		<a href="/user/<?= $thread['user_id'] ?>"><?= user_show_name($thread) ?></a>
-		<div><?= htmlspecialchars($thread['content']); ?></div>
 		<div><?= $thread['create_time'] ?></div>
 		<div>回帖数：<?= $thread['comment_count'] ?></div>
 	</li>

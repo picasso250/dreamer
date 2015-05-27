@@ -3,8 +3,10 @@
 function all_thread()
 {
     global $db;
-    $sql = "SELECT t.*,u.name username,u.email
-        from thread t inner join user u on u.id=t.user_id 
+    $sql = "SELECT t.*,u.name username,u.email, n.name node_name
+        from thread t 
+        inner join user u on u.id=t.user_id 
+        inner join node n on n.id=t.node_id 
         order by action_time desc limit 111";
     return $list = $db->queryAll($sql);
 }
