@@ -3,7 +3,9 @@
 function all_thread()
 {
     global $db;
-    $sql = "SELECT * from thread order by action_time desc limit 111";
+    $sql = "SELECT t.*,u.name username,u.email
+        from thread t inner join user u on u.id=t.user_id 
+        order by action_time desc limit 111";
     return $list = $db->queryAll($sql);
 }
 function get_thread($id)
