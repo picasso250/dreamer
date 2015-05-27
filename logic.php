@@ -17,7 +17,8 @@ function get_thread($id)
 function all_comment($t_id)
 {
     global $db;
-    $sql = "SELECT * from comment where t_id=?";
+    $sql = "SELECT c.*,u.name username, u.email 
+            from comment c inner join user u on u.id=c.user_id where c.t_id=?";
     return $comments = $db->queryAll($sql, [$t_id]);
 }
 function send_mail($to, $subject, $body, $AltBody = null) {
@@ -81,4 +82,8 @@ function check_user_reset()
         return [false, '参数不正确'];
     }
     return [true, $user];
+}
+function user_show_name($user)
+{
+    return htmlspecialchars($user['username'] ?: $user['email']);
 }

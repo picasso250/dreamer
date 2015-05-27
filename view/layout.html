@@ -11,7 +11,7 @@
 	<h1><a href="/">梦想家</a></h1>
 	<?php global $cur_user; if (user_id()): ?>
 		<div>
-			Welcome, <?= $cur_user['name'] ?: $cur_user['email'] ?>
+			Welcome, <?= htmlspecialchars($cur_user['name'] ?: $cur_user['email']) ?>
 			<a href="/logout">logout</a>
 		</div>
 	<?php else: ?>
