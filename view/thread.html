@@ -19,6 +19,7 @@ $(function () {
 	ajax_form('form', function (ret) {
 		if (ret.code === 0) {
 			$('#MainList').load("/comment_list/<?= $thread['id'] ?>");
+			$('input,textarea').val('');
 		}
 	})
 });
