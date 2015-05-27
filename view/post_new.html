@@ -1,0 +1,15 @@
+<form method="post" action="post" class="ajax">
+	<div class="form-msg"></div>
+	<input name="title" placeholder="标题">
+	<br>
+	<textarea name="content"></textarea>
+	<br>
+	<input name="node_name" placeholder="节点">
+	<select name="node_id">
+		<option value="0">手工填写</option>
+		<?php foreach ($nodes as $node): ?>
+		<option value="<?= $node['id'] ?>"><?= $node['name'] ?></option>
+		<?php endforeach ?>
+	</select>
+	<button>ok</button>
+</form>

@@ -23,8 +23,18 @@ function post()
     $data = compact('title', 'content');
     $data['user_id'] = user_id();
     $data['action_time'] = $db::timestamp();
+    if (empty($_POST['node_id'])) {
+        $node_id = 0;
+        if (!empty($_POST['node_name'])) {
+            $node_name = trim($_POST['node_name']);
+            $node_id = ensure_node_name($node_name);
+        }
+    } else {
+        $node_id = $_POST['node_id'];
+    }
+    $data['node_id'] = $node_id;
     $id = $db->insert('thread', $data);
-    return \echo_json(compact('id'));
+    return \echo_json(['url' => "/thread/$id"]);
 }
 function login()
 {
@@ -48,6 +58,7 @@ function login_check()
         return \echo_json(2, 'no user');
     }
     if (($user['password']) !== sha1($password)) {
+        error_log("$user[id] $name password try fail");
         return \echo_json(3, 'password not correct');
     }
     user_id($user['id']);
@@ -166,4 +177,10 @@ function change_password()
     $password_new = $_POST['password_new'];
     $db->update('user', ['password' => sha1($password_new)], ['id' => user_id()]);
     echo_json([]);
+}
+function post_new()
+{
+    global $db;
+    $nodes = $db->queryAll("SELECT * from node limit 121");
+    render(compact('nodes'));
 }

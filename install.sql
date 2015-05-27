@@ -30,3 +30,17 @@ ALTER TABLE `dreamer`.`comment`
 ADD COLUMN `t_id` INT UNSIGNED NOT NULL AFTER `create_time`;
 ALTER TABLE `dreamer`.`thread` 
 ADD COLUMN `comment_count` SMALLINT UNSIGNED NOT NULL AFTER `user_id`;
+CREATE TABLE `dreamer`.`node` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `pid` INT UNSIGNED NOT NULL,
+  `creat_time` TIMESTAMP NOT NULL,
+  PRIMARY KEY (`id`));
+ALTER TABLE `dreamer`.`node` 
+CHANGE COLUMN `creat_time` `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ;
+ALTER TABLE `dreamer`.`node` 
+CHANGE COLUMN `name` `name` VARCHAR(45) NOT NULL ;
+ALTER TABLE `thread` 
+ADD COLUMN `node_id` INT UNSIGNED NOT NULL AFTER `create_time`;
+ALTER TABLE `dreamer`.`node` 
+CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ;

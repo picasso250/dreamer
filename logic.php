@@ -87,3 +87,17 @@ function user_show_name($user)
 {
     return htmlspecialchars($user['username'] ?: $user['email']);
 }
+function ensure_node_name($node_name)
+{
+    $node = $db->get_node_by_name($node_name);
+    if ($node) {
+        $node_id = $node['id'];
+    } else {
+        $data = [
+            'name' => $node_name,
+            'user_id' => user_id(),
+        ];
+        $node_id = $db->insert('node', $data);
+    }
+    return $node_id;
+}
