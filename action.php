@@ -97,7 +97,6 @@ function send_forgot()
     if (empty($user)) {
         return \echo_json(1, 'no user');
     }
-    error_log("send $email forgot email");
     $query = http_build_query([
         'verify' => user_verify($user),
         'id' => $user['id'],
@@ -107,7 +106,9 @@ function send_forgot()
     click this to reset
     <a href='$href'>$href</a>
     ";
-    send_mail($email, "ur password", $body);
+    list($ok, $msg) = send_mail($email, "ur password", $body);
+    error_log("send $email forgot email $ok, $msg");
+    echo_json(compact('ok'));
 }
 function reset_password()
 {
