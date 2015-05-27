@@ -19,3 +19,6 @@
 .tab.on {
 	background-color: grey;
 }
+.control-bar {
+	float: right;
+}
