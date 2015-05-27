@@ -9,8 +9,11 @@
 <body>
 <header>
 	<h1>梦想家</h1>
-	<?php if (user_id()): ?>
+	<?php global $user; if (user_id()): ?>
+		<div>
+		Welcome, <?= $user['name'] ?: $user['email'] ?>
 		<a href="logout">logout</a>
+		</div>
 	<?php else: ?>
 		<a href="login">login</a>
 	<?php endif ?>
