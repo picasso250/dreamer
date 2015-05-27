@@ -1,6 +1,7 @@
 <?php
 
 require 'xiaochi-db/src/DB.php';
+require 'lib.php';
 require 'action.php';
 
 $REQUEST_URI = $_SERVER['REQUEST_URI'];
