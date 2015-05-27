@@ -81,3 +81,7 @@ function comment_list($t_id)
     $comments = all_comment($t_id);
     include 'view/comment_list.html';
 }
+function forgot()
+{
+    render();
+}
