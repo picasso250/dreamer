@@ -9,9 +9,9 @@
 <body>
 <header>
 	<h1><a href="/">梦想家</a></h1>
-	<?php global $user; if (user_id()): ?>
+	<?php global $cur_user; if (user_id()): ?>
 		<div>
-			Welcome, <?= $user['name'] ?: $user['email'] ?>
+			Welcome, <?= $cur_user['name'] ?: $cur_user['email'] ?>
 			<a href="/logout">logout</a>
 		</div>
 	<?php else: ?>

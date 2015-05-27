@@ -56,3 +56,27 @@ function user_verify($user)
 {
     return sha1(implode('.', $user));
 }
+function check_user_reset()
+{
+    global $db;
+    if (empty($_REQUEST['id'])) {
+        error_log("no id");
+        return [false, '参数不正确'];
+    }
+    $id = $_REQUEST['id'];
+    if (empty($_REQUEST['verify'])) {
+        error_log("no verify");
+        return [false, '参数不正确'];
+    }
+    $verify = $_REQUEST['verify'];
+    $user = $db->get_user_by_id($id);
+    if (empty($user)) {
+        error_log("no user $id");
+        return [false, '参数不正确'];
+    }
+    if ($verify !== user_verify($user)) {
+        error_log("verify not match");
+        return [false, '参数不正确'];
+    }
+    return [true, $user];
+}

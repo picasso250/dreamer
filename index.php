@@ -26,9 +26,9 @@ $db = new \xiaochi\DB($dbc['dsn'], $dbc['username'], $dbc['password']);
 
 session_start();
 $user_id = user_id();
-$user = null;
+$cur_user = null;
 if ($user_id) {
-    $user = $db->get_user_by_id($user_id);
+    $cur_user = $db->get_user_by_id($user_id);
 }
 
 header('Content-Type: text/html; charset=utf-8');

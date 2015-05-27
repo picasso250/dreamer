@@ -111,24 +111,25 @@ function send_forgot()
 }
 function reset_password()
 {
+    list($ok, $msg) = check_user_reset();
+    if (!$ok) {
+        render(compact('msg'));
+    } else {
+        render(['msg' => '', 'user' => $msg]);
+    }
+}
+function do_reset_password()
+{
     global $db;
-    if (empty($_GET['id'])) {
-        render(['msg' => '参数不正确']);
-        return;
+    list($ok, $msg) = check_user_reset();
+    if (!$ok) {
+        return echo_json(1, $msg);
     }
-    $id = $_GET['id'];
-    $user = $db->get_user_by_id($id);
-    if (empty($user)) {
-        render(['msg' => '参数不正确']);
-        return;
+    $user = $msg;
+    if (empty($_POST['password'])) {
+        return echo_json(1, 'no password');
     }
-    if (empty($_GET['verify'])) {
-        return render(['msg' => '参数不正确']);
-    }
-    $verify = $_GET['verify'];
-    if ($verify !== user_verify($user)) {
-        return render(['msg' => '参数不正确']);
-    }
-    var_dump($user['email']);
-    render(['msg' => '', 'user' => $user]);
+    $password = $_POST['password'];
+    $db->update('user', ['password' => sha1($password)], ['id' => $user['id']]);
+    echo_json([]);
 }
