@@ -44,3 +44,5 @@ ALTER TABLE `thread`
 ADD COLUMN `node_id` INT UNSIGNED NOT NULL AFTER `create_time`;
 ALTER TABLE `dreamer`.`node` 
 CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ;
+ALTER TABLE `dreamer`.`node` 
+ADD COLUMN `user_id` INT UNSIGNED NOT NULL AFTER `create_time`;

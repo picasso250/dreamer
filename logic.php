@@ -6,7 +6,7 @@ function all_thread()
     $sql = "SELECT t.*,u.name username,u.email, n.name node_name
         from thread t 
         inner join user u on u.id=t.user_id 
-        inner join node n on n.id=t.node_id 
+        left join node n on n.id=t.node_id 
         order by action_time desc limit 111";
     return $list = $db->queryAll($sql);
 }
@@ -91,6 +91,7 @@ function user_show_name($user)
 }
 function ensure_node_name($node_name)
 {
+    global $db;
     $node = $db->get_node_by_name($node_name);
     if ($node) {
         $node_id = $node['id'];
