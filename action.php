@@ -139,3 +139,9 @@ function do_reset_password()
     $db->update('user', ['password' => sha1($password)], ['id' => $user['id']]);
     echo_json([]);
 }
+function user($id)
+{
+    global $db;
+    $user = $db->get_user_by_id($id);
+    render(compact('user'));
+}
