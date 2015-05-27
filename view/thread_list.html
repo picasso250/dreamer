@@ -4,5 +4,6 @@
 		<a href="/user/<?= $thread['user_id'] ?>"><?= htmlspecialchars($thread['username'] ?: $thread['email']) ?></a>
 		<div><?= htmlspecialchars($thread['content']); ?></div>
 		<div><?= $thread['create_time'] ?></div>
+		<div>回帖数：<?= $thread['comment_count'] ?></div>
 	</li>
 <?php endforeach ?>

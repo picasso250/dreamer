@@ -75,6 +75,11 @@ function post_comment($t_id)
     $data = compact('t_id', 'content');
     $data['user_id'] = user_id();
     $id = $db->insert('comment', $data);
+    $sql = 'UPDATE thread set 
+        comment_count=comment_count+1,
+        action_time=?
+        where id=?';
+    $db->execute($sql, [$db::timestamp(), $t_id]);
     return \echo_json(compact('id'));
 }
 function comment_list($t_id)

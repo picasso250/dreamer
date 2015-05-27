@@ -28,3 +28,5 @@ CREATE TABLE `dreamer`.`comment` (
   PRIMARY KEY (`id`));
 ALTER TABLE `dreamer`.`comment` 
 ADD COLUMN `t_id` INT UNSIGNED NOT NULL AFTER `create_time`;
+ALTER TABLE `dreamer`.`thread` 
+ADD COLUMN `comment_count` SMALLINT UNSIGNED NOT NULL AFTER `user_id`;
