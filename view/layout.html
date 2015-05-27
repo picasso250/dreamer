@@ -12,6 +12,7 @@
 	<?php global $cur_user; if (user_id()): ?>
 		<div>
 			Welcome, <?= htmlspecialchars($cur_user['name'] ?: $cur_user['email']) ?>
+			<a href="/setting">设置</a>
 			<a href="/logout">logout</a>
 		</div>
 	<?php else: ?>

@@ -145,3 +145,25 @@ function user($id)
     $user = $db->get_user_by_id($id);
     render(compact('user'));
 }
+function setting()
+{
+    render();
+}
+function change_password()
+{
+    global $cur_user;
+    global $db;
+    if (empty($_POST['password'])) {
+        return echo_json(1, 'no password');
+    }
+    $password = $_POST['password'];
+    if (sha1($password) !== $cur_user['password']) {
+        return echo_json(1, 'old password not correct');
+    }
+    if (empty($_POST['password_new'])) {
+        return echo_json(1, 'no new password');
+    }
+    $password_new = $_POST['password_new'];
+    $db->update('user', ['password' => sha1($password_new)], ['id' => user_id()]);
+    echo_json([]);
+}

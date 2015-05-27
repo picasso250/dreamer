@@ -21,7 +21,7 @@ function ajax_form(form, callback)
 				return
 			}
 			$btn.text(old);
-			$('#FormAlert').text(ret.msg);
+			postForm.find('.form-msg').text(ret.msg);
 		}, 'json');
 	});
 }
