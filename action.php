@@ -47,7 +47,7 @@ function login_check()
         echo_json_exit(3, 'password not correct');
     }
     user_id($user['id']);
-    echo_json_exit(0);
+    echo_json_exit(['url' => '/']);
 }
 function logout()
 {
