@@ -51,6 +51,7 @@ function login_check()
         echo_json_exit(3, 'password not correct');
     }
     user_id($user['id']);
+    error_log("$user[id] $name login");
     echo_json_exit(['url' => '/']);
 }
 function logout()
@@ -84,4 +85,27 @@ function comment_list($t_id)
 function forgot()
 {
     render();
+}
+function send_forgot()
+{
+    global $db;
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    if (empty($email)) {
+        echo_json_exit(1, 'plz provide email');
+    }
+    $user = $db->get_user_by_email($email);
+    if (empty($user)) {
+        echo_json_exit(1, 'no user');
+    }
+    error_log("send $email forgot email");
+    $query = http_build_query([
+        'verify' => user_verify($user),
+        'id' => $user['id'],
+    ]);
+    $href = "http://$_SERVER[HTTP_HOST]/reset_password?$query";
+    $body = "
+    click this to reset
+    <a href='$href'>$href</a>
+    ";
+    send_mail($email, "ur password", $body);
 }
