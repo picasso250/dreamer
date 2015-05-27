@@ -1,0 +1,3 @@
+[submodule "xiaochi-db"]
+	path = xiaochi-db
+	url = git@github.com:picasso250/xiaochi-db.git
