@@ -1,6 +1,6 @@
 <?php
 
-function echo_json_exit($code, $msg = 'ok')
+function echo_json($code, $msg = 'ok')
 {
     header('Content-Type: application/json; charset=utf-8');
     if (is_int($code)) {
@@ -9,7 +9,6 @@ function echo_json_exit($code, $msg = 'ok')
         $res = ['code' => 0, 'msg' => $msg, 'data' => $code];
     }
     echo json_encode($res);
-    exit;
 }
 function render($data = [])
 {

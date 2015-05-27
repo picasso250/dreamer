@@ -16,7 +16,7 @@ function post()
 {
     global $db;
     if (empty($_POST['title'])) {
-        \echo_json_exit(1, 'no title');
+        return \echo_json(1, 'no title');
     }
     $title = $_POST['title'];
     $content = isset($_POST['content']) ? $_POST['content'] : null;
@@ -24,7 +24,7 @@ function post()
     $data['user_id'] = user_id();
     $data['action_time'] = $db::timestamp();
     $id = $db->insert('thread', $data);
-    \echo_json_exit(compact('id'));
+    return \echo_json(compact('id'));
 }
 function login()
 {
@@ -33,11 +33,11 @@ function login()
 function login_check()
 {
     if (empty($_POST['name'])) {
-        echo_json_exit(1, 'no name');
+        return \echo_json(1, 'no name');
     }
     $name = $_POST['name'];
     if (empty($_POST['password'])) {
-        echo_json_exit(1, 'no password');
+        return \echo_json(1, 'no password');
     }
     $password = $_POST['password'];
 
@@ -45,14 +45,14 @@ function login_check()
     $sql = "SELECT * from user where name=:name or email=:name limit 1";
     $user = $db->queryRow($sql, compact('name'));
     if (empty($user)) {
-        echo_json_exit(2, 'no user');
+        return \echo_json(2, 'no user');
     }
     if (($user['password']) !== sha1($password)) {
-        echo_json_exit(3, 'password not correct');
+        return \echo_json(3, 'password not correct');
     }
     user_id($user['id']);
     error_log("$user[id] $name login");
-    echo_json_exit(['url' => '/']);
+    return \echo_json(['url' => '/']);
 }
 function logout()
 {
@@ -69,13 +69,13 @@ function post_comment($t_id)
 {
     global $db;
     if (empty($_POST['content'])) {
-        echo_json_exit(1, 'empty content');
+        return \echo_json(1, 'empty content');
     }
     $content = $_POST['content'];
     $data = compact('t_id', 'content');
     $data['user_id'] = user_id();
     $id = $db->insert('comment', $data);
-    echo_json_exit(compact('id'));
+    return \echo_json(compact('id'));
 }
 function comment_list($t_id)
 {
@@ -91,11 +91,11 @@ function send_forgot()
     global $db;
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
     if (empty($email)) {
-        echo_json_exit(1, 'plz provide email');
+        return \echo_json(1, 'plz provide email');
     }
     $user = $db->get_user_by_email($email);
     if (empty($user)) {
-        echo_json_exit(1, 'no user');
+        return \echo_json(1, 'no user');
     }
     error_log("send $email forgot email");
     $query = http_build_query([
@@ -108,4 +108,27 @@ function send_forgot()
     <a href='$href'>$href</a>
     ";
     send_mail($email, "ur password", $body);
+}
+function reset_password()
+{
+    global $db;
+    if (empty($_GET['id'])) {
+        render(['msg' => '参数不正确']);
+        return;
+    }
+    $id = $_GET['id'];
+    $user = $db->get_user_by_id($id);
+    if (empty($user)) {
+        render(['msg' => '参数不正确']);
+        return;
+    }
+    if (empty($_GET['verify'])) {
+        return render(['msg' => '参数不正确']);
+    }
+    $verify = $_GET['verify'];
+    if ($verify !== user_verify($user)) {
+        return render(['msg' => '参数不正确']);
+    }
+    var_dump($user['email']);
+    render(['msg' => '', 'user' => $user]);
 }
