@@ -66,6 +66,7 @@ function thread($id)
 }
 function post_comment($t_id)
 {
+    global $db;
     if (empty($_POST['content'])) {
         echo_json_exit(1, 'empty content');
     }
@@ -77,6 +78,6 @@ function post_comment($t_id)
 }
 function comment_list($t_id)
 {
-    $comments = all_comment($id);
+    $comments = all_comment($t_id);
     include 'view/comment_list.html';
 }
