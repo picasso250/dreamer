@@ -19,15 +19,13 @@ function index()
     foreach ($nodes as &$node) {
         $node['sub'] = $db->all_node_by_pid($node['id']);
     }
-    $total_memeber = $db->count_user();
-    $total_thread  = $db->count_thread();
-    $total_comment = $db->count_comment();
     $data = compact(
-        'list', 'nodes', 'tab', 'subtab', 'sub_nodes',
-        'total_memeber',
-        'total_thread',
-        'total_comment'
+        'list', 'nodes', 'tab', 'subtab', 'sub_nodes'
     );
+    $data['total_memeber'] = $db->count_user();
+    $data['total_thread']  = $db->count_thread();
+    $data['total_comment'] = $db->count_comment();
+    $data['my_fav_count'] = $db->count_fav_by_user_id_and_is_delete(user_id(), 0);
     render($data);
 }
 function thread_list()
