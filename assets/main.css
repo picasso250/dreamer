@@ -44,3 +44,7 @@ header h1 {
 .index-search {
 	padding: 29px 139px;
 }
+.append-info{
+	border: 1px solid;
+	padding: 3px;
+}

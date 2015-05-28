@@ -18,8 +18,16 @@
 			>踩</button>
 		<a href="/user/<?= $thread['user_id'] ?>"><?= $thread['username'] ?></a>
 		<span><?= htmlspecialchars($thread['create_time']) ?></span>
-		<span><?= htmlspecialchars($thread['visit_count']) ?>
-			次点击</span>
+		<span>
+			<?= htmlspecialchars($thread['visit_count']) ?>
+			次点击
+		</span>
+		<?php if ($fav_count): ?>
+			<span>
+				<?= $fav_count ?>
+				人收藏
+			</span>
+		<?php endif ?>
 		<?php if ($thread['user_id'] == user_id()): ?>
 			<a href="/append/<?= $thread['id'] ?>">Append</a>
 		<?php endif ?>

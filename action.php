@@ -105,9 +105,10 @@ function thread($id)
     $fav = $db->get_fav_by_user_id_and_t_id(user_id(), $id);
     $is_my_fav = $fav ? (1 - $fav['is_delete']) : 0;
     $fav_text_map = ['加入收藏', '取消收藏'];
+    $fav_count = $db->count_fav_by_t_id($id);
     $data = compact(
         'thread', 'comments',
-        'my_votes', 'is_my_fav', 'fav_text_map',
+        'my_votes', 'is_my_fav', 'fav_text_map', 'fav_count',
         'appends');
     render($data);
 }
@@ -344,7 +345,9 @@ function new_user()
 }
 function append($t_id)
 {
-    render(compact('t_id'));
+    global $db;
+    $thread = $db->get_thread_by_id($t_id);
+    render(compact('t_id', 'thread'));
 }
 function append_thread($t_id)
 {
