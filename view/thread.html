@@ -1,4 +1,3 @@
-<hr>
 <div>
 	<a href="/node/<?= $thread['node_id'] ?>"><?= $thread['node_name'] ?></a>
 	<h3><?= htmlspecialchars($thread['title']) ?></h3>
@@ -22,7 +21,10 @@
 		<span><?= htmlspecialchars($thread['visit_count']) ?>
 			次点击</span>
 	</div>
-	<div><?= htmlspecialchars($thread['content']) ?></div>
+
+	<hr>
+	
+	<div><?= nl2br(htmlspecialchars($thread['content'])) ?></div>
 	<button id="FavBtn" data-value="<?= 1 - $is_my_fav ?>">
 		<?= $fav_text_map[$is_my_fav] ?></button>
 </div>
