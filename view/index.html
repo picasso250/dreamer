@@ -54,3 +54,18 @@ $(function () {
 	</table>
 </div>
 
+<div>
+	<h4>节点导航</h4>
+	<table>
+		<?php foreach ($nodes as $node): ?>
+			<tr>
+				<td><?= $node['name'] ?></td>
+				<td>
+					<?php foreach ($node['sub'] as $n): ?>
+						<a href="/node/<?= $n['id'] ?>"><?= $n['name'] ?></a>
+					<?php endforeach ?>
+				</td>
+			</tr>
+		<?php endforeach ?>
+	</table>
+</div>

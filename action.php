@@ -16,10 +16,14 @@ function index()
     if ($tab) {
         $sub_nodes = $db->all_node_by_pid($tab);
     }
+    foreach ($nodes as &$node) {
+        $node['sub'] = $db->all_node_by_pid($node['id']);
+    }
     $total_memeber = $db->count_user();
     $total_thread  = $db->count_thread();
     $total_comment = $db->count_comment();
-    $data = compact('list', 'nodes', 'tab', 'subtab', 'sub_nodes',
+    $data = compact(
+        'list', 'nodes', 'tab', 'subtab', 'sub_nodes',
         'total_memeber',
         'total_thread',
         'total_comment'
