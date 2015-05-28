@@ -24,16 +24,13 @@ if ($user_id) {
 }
 
 $login_check_router_list = [
-    'setting',
-    'post',
-    'post_new',
-    'fav',
+    'post', 'post_new',
     'post_comment',
     'vote_thread',
-    'fav_thread',
+    'fav', 'fav_thread',
+    'setting',
     'change_password',
-    'append',
-    'append_thread',
+    'append', 'append_thread',
 ];
 if (in_array($router, $login_check_router_list) && !$user_id) {
     die("u need login");
