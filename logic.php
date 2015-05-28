@@ -144,6 +144,7 @@ function node_id_input()
 }
 function visit_thread($id)
 {
+    global $db;
     $sql = 'UPDATE thread set 
             visit_count=visit_count+1,
             hot=hot+1

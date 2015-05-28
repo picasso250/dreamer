@@ -28,6 +28,17 @@
 	<hr>
 
 	<div><?= nl2br(htmlspecialchars($thread['content'])) ?></div>
+	<?php foreach ($appends as $i => $append): ?>
+		<div class="append-info">
+			<div>
+				第
+				<?= $i+1 ?>
+				条附言
+				<?= $append['create_time'] ?>
+			</div>
+			<div><?= nl2br(htmlspecialchars($append['content'])) ?></div>
+		</div>
+	<?php endforeach ?>
 	<button id="FavBtn" data-value="<?= 1 - $is_my_fav ?>">
 		<?= $fav_text_map[$is_my_fav] ?></button>
 </div>

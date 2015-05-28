@@ -348,6 +348,7 @@ function append($t_id)
 }
 function append_thread($t_id)
 {
+    global $db;
     if (empty($_POST['append'])) {
         return echo_json(1, 'u do not have to append empty');
     }
