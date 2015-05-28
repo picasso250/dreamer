@@ -94,11 +94,9 @@ function thread($id)
     global $db;
     $thread = get_thread($id);
     $comments = all_comment($id);
-    $sql = 'UPDATE thread set 
-            visit_count=visit_count+1,
-            hot=hot+1
-            where id=?';
-    $db->execute($sql, [$id]);
+    visit_thread($id);
+    $sql = "SELECT * from append where t_id=? order by id asc";
+    $appends = $db->queryAll($sql, [$id]);
     $votes = $db->all_vote_by_user_id_and_t_id(user_id(), $id);
     $my_votes = [];
     foreach ($votes as $vote) {
@@ -108,7 +106,9 @@ function thread($id)
     $is_my_fav = $fav ? (1 - $fav['is_delete']) : 0;
     $fav_text_map = ['加入收藏', '取消收藏'];
     $data = compact(
-        'thread', 'comments', 'my_votes', 'is_my_fav', 'fav_text_map');
+        'thread', 'comments',
+        'my_votes', 'is_my_fav', 'fav_text_map',
+        'appends');
     render($data);
 }
 function post_comment($t_id)
@@ -319,22 +319,45 @@ function new_user()
         return echo_json(1, 'email or username, at least one');
     }
     $data = [];
+    $desc = '';
     if (!empty($_POST['email'])) {
         $data['email'] = $email = $_POST['email'];
         if ($db->get_user_by_email($email)) {
             return echo_json(1, 'email taken');
         }
+        $desc .= " email: $email ";
     }
     if (!empty($_POST['username'])) {
         $data['name'] = $username = $_POST['username'];
         if ($db->get_user_by_name($username)) {
             return echo_json(1, 'username taken');
         }
+        $desc .= " username: $username ";
     }
     if (empty($_POST['password'])) {
         return echo_json(1, 'password need');
     }
     $data['password'] = sha1($_POST['password']);
     $id = $db->insert('user', $data);
+    error_log("new user $desc ==> $id");
     echo_json(compact('id'));
+}
+function append($t_id)
+{
+    render(compact('t_id'));
+}
+function append_thread($t_id)
+{
+    if (empty($_POST['append'])) {
+        return echo_json(1, 'u do not have to append empty');
+    }
+    $content = $_POST['append'];
+    $thread = $db->get_thread_by_id($t_id);
+    $user_id = user_id();
+    if ($thread['user_id'] != $user_id) {
+        error_log("user $user_id modify thread $t_id, not his");
+        return echo_json(1, 'u cannot modify others');
+    }
+    $id = $db->insert('append', compact('content', 't_id'));
+    echo_json(['url' => "/thread/$t_id"]);
 }

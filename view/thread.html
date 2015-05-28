@@ -20,10 +20,13 @@
 		<span><?= htmlspecialchars($thread['create_time']) ?></span>
 		<span><?= htmlspecialchars($thread['visit_count']) ?>
 			次点击</span>
+		<?php if ($thread['user_id'] == user_id()): ?>
+			<a href="/append/<?= $thread['id'] ?>">Append</a>
+		<?php endif ?>
 	</div>
 
 	<hr>
-	
+
 	<div><?= nl2br(htmlspecialchars($thread['content'])) ?></div>
 	<button id="FavBtn" data-value="<?= 1 - $is_my_fav ?>">
 		<?= $fav_text_map[$is_my_fav] ?></button>

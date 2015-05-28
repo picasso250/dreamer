@@ -54,3 +54,10 @@ CREATE TABLE `vote` (
   `attitude` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `dreamer`.`append` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `content` TEXT NOT NULL,
+  `create_time` TIMESTAMP NOT NULL,
+  PRIMARY KEY (`id`));
+ALTER TABLE `dreamer`.`append` 
+ADD COLUMN `t_id` INT UNSIGNED NOT NULL AFTER `create_time`;

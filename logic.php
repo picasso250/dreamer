@@ -142,3 +142,11 @@ function node_id_input()
     }
     return $node_id;
 }
+function visit_thread($id)
+{
+    $sql = 'UPDATE thread set 
+            visit_count=visit_count+1,
+            hot=hot+1
+            where id=?';
+    $db->execute($sql, [$id]);
+}
