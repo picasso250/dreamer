@@ -16,7 +16,15 @@ function index()
     if ($tab) {
         $sub_nodes = $db->all_node_by_pid($tab);
     }
-    render(compact('list', 'nodes', 'tab', 'subtab', 'sub_nodes'));
+    $total_memeber = $db->count_user();
+    $total_thread  = $db->count_thread();
+    $total_comment = $db->count_comment();
+    $data = compact('list', 'nodes', 'tab', 'subtab', 'sub_nodes',
+        'total_memeber',
+        'total_thread',
+        'total_comment'
+    );
+    render($data);
 }
 function thread_list()
 {
