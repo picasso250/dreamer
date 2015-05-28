@@ -286,6 +286,7 @@ function fav_thread($t_id)
             return echo_json(1, 'u do not have fav it');
         }
     }
+    $db->update('thread', ['action_time' => $db::timestamp()], ['id' => $t_id]);
     echo_json(0);
 }
 function fav()
