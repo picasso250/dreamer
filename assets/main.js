@@ -8,7 +8,7 @@ $.fn.extend({
 			$button.data('old', old)
 		}
 		if (state === 'reset') {
-			$button.prop('disabled', true);
+			$button.prop('disabled', false);
 			$button.text($button.data('old'));
 		}
 	}
