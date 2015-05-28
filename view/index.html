@@ -6,7 +6,7 @@
 	<div>请先登录再发言</div>
 <?php endif ?>
 
-<div>
+<div class="node-navbar">
 <?php foreach ($nodes as $node): ?>
 	<a href="?tab=<?= $node['id'] ?>"
 		class="tab <?php if ($tab === $node['id']): ?>on<?php endif ?>"
@@ -22,29 +22,15 @@
 	</div>
 <?php endif ?>
 
-<ul id="MainList">
-<?php include 'thread_list.html' ?>
-</ul>
-
-<script type="text/javascript">
-$(function () {
-	ajax_form('form', function (ret) {
-		if (ret.code === 0) {
-			$('#MainList').load('thread_list');
-			$('input,textarea').val('');
-		}
-	})
-});
-</script>
-
-<div>
+<div class="right-bar">
+<div class="">
 	<a href="/fav">
 		收藏
 		<?= $my_fav_count ?>
 	</a>
 </div>
 
-<div>
+<div class="">
 	<h4>今日热议主题</h4>
 	<ol>
 	<?php foreach ($top10 as $thread): ?>
@@ -52,7 +38,7 @@ $(function () {
 	<?php endforeach ?>
 	</ol>
 </div>
-<div>
+<div class="">
 	<h4>社区运行状况</h4>
 	<table>
 		<tr>
@@ -69,6 +55,22 @@ $(function () {
 		</tr>
 	</table>
 </div>
+</div>
+
+<ul id="MainList">
+<?php include 'thread_list.html' ?>
+</ul>
+
+<script type="text/javascript">
+$(function () {
+	ajax_form('form', function (ret) {
+		if (ret.code === 0) {
+			$('#MainList').load('thread_list');
+			$('input,textarea').val('');
+		}
+	})
+});
+</script>
 
 <div>
 	<h4>节点导航</h4>

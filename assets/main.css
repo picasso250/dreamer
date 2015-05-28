@@ -10,7 +10,6 @@
 	text-decoration: none;
 	width: 3em;
 	padding: 3px 4px;
-	border-radius: 3px;
 	display: inline-block;
 	text-align: center;
 }
@@ -26,4 +25,19 @@
 }
 .thread-detail-info {
 	font-size: small;
+}
+.right-bar {
+	width: 311px;
+	float: right;
+	clear: both;
+	border: 1px solid;
+}
+header {
+	height: 78px;
+}
+header h1 {
+	float: left;
+}
+.node-navbar{
+	border: 1px solid;
 }
