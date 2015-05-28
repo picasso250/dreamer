@@ -199,18 +199,22 @@ function vote_thread($t_id)
         return echo_json(1, 'no value');
     }
     $value = $_POST['value'];
+    $user_id = user_id();
+    $vote = $db->get_vote_by_user_id_and_attitude($user_id, $value);
+    if ($vote) {
+        return echo_json(1, 'u have vote');
+    }
     $db->insert('vote', [
         'user_id' => user_id(),
         't_id' => $t_id,
         'attitude' => $value,
     ]);
-    $thread = $db->get_thread_by_id($t_id);
     $map = [
         1 => 'vote_for',
         -1 => 'vote_against',
     ];
     $field = $map[$value];
-    $num = $thread[$field] + 1;
+    $num = $db->count_vote_by_user_and_attitude($user_id, $value);
     $db->update('thread', [$field => $num], ['id' => $t_id]);
     echo_json(compact('num'));
 }

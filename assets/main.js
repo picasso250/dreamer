@@ -2,12 +2,12 @@ $.fn.extend({
 	button: function(state) {
 		var $button = $(this);
 		if (state === 'loading') {
-			$button.attr('disable', true);
+			$button.prop('disabled', true);
 			var old = $button.text('...');
 			$button.data('old', old)
 		}
 		if (state === 'reset') {
-			$button.attr('disable', true);
+			$button.prop('disabled', true);
 			$button.text($button.data('old'));
 		}
 	}
