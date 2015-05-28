@@ -308,3 +308,32 @@ function fav()
             order by f.id desc limit 111", [$user_id]);
     render(compact('list'));
 }
+function register()
+{
+    render();
+}
+function new_user()
+{
+    global $db;
+    if (empty($_POST['email']) && empty($_POST['username'])) {
+        return echo_json(1, 'email or username, at list one');
+    }
+    $data = [];
+    if (!empty($_POST['email'])) {
+        $data['email'] = $email = $_POST['email'];
+        if ($db->get_user_by_email($email)) {
+            return echo_json(1, 'email taken');
+        }
+    }
+    if (!empty($_POST['username'])) {
+        $data['name'] = $username = $_POST['username'];
+        if ($db->get_user_by_name($username)) {
+            return echo_json(1, 'username taken');
+        }
+    }
+    if (empty($_POST['password'])) {
+        $data['password'] = sha1($_POST['password']);
+    }
+    $id = $db->insert('user', $data);
+    echo_json(compact('id'));
+}
