@@ -26,6 +26,7 @@ function index()
     $data['total_thread']  = $db->count_thread();
     $data['total_comment'] = $db->count_comment();
     $data['my_fav_count'] = $db->count_fav_by_user_id_and_is_delete(user_id(), 0);
+    $data['top10'] = _all_thread("order by hot desc limit 10");
     render($data);
 }
 function thread_list()
@@ -189,7 +190,8 @@ function user($id)
 {
     global $db;
     $user = $db->get_user_by_id($id);
-    render(compact('user'));
+    $list = _all_thread("where t.user_id=?", [$id]);
+    render(compact('user', 'list'));
 }
 function setting()
 {

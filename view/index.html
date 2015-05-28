@@ -43,6 +43,15 @@ $(function () {
 		<?= $my_fav_count ?>
 	</a>
 </div>
+
+<div>
+	<h4>今日热议主题</h4>
+	<ol>
+	<?php foreach ($top10 as $thread): ?>
+		<li><a href="/thread/<?= $thread['id'] ?>"><?= $thread['title'] ?></a></li>
+	<?php endforeach ?>
+	</ol>
+</div>
 <div>
 	<h4>社区运行状况</h4>
 	<table>

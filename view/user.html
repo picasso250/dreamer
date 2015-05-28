@@ -1,2 +1,10 @@
 <h3><?= $user['name'] ?></h3>
+<div>
 加入于 <?= $user['create_time'] ?>
+</div>
+
+<h4><?= $user['name'] ?>
+	创建的所有主题</h4>
+<ul id="MainList">
+<?php include 'thread_list.html' ?>
+</ul>
