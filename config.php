@@ -5,6 +5,7 @@ return array(
         'dsn' => 'mysql:host=localhost;dbname=dreamer',
         'username' => 'root',
         'password' => 'root',
+        'debug' => true,
     ],
     'mail' => ['debug' => true],
 );

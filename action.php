@@ -214,7 +214,7 @@ function vote_thread($t_id)
         -1 => 'vote_against',
     ];
     $field = $map[$value];
-    $num = $db->count_vote_by_user_and_attitude($user_id, $value);
+    $num = $db->count_vote_by_user_id_and_attitude($user_id, $value);
     $db->update('thread', [$field => $num], ['id' => $t_id]);
     echo_json(compact('num'));
 }
