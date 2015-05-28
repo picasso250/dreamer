@@ -52,3 +52,12 @@ ALTER TABLE `dreamer`.`node`
 ADD COLUMN `description` VARCHAR(255) NULL AFTER `user_id`;
 ALTER TABLE `dreamer`.`thread` 
 ADD COLUMN `root_node_id` INT UNSIGNED NOT NULL AFTER `vote_against`;
+CREATE TABLE `dreamer`.`fav` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `t_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`));
+ALTER TABLE `dreamer`.`fav` 
+ADD COLUMN `create_time` TIMESTAMP NOT NULL AFTER `t_id`;
+ALTER TABLE `dreamer`.`fav` 
+ADD COLUMN `is_delete` TINYINT UNSIGNED NOT NULL AFTER `create_time`;

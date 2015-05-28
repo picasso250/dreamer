@@ -96,15 +96,19 @@ function thread($id)
     $thread = get_thread($id);
     $comments = all_comment($id);
     $sql = 'UPDATE thread set 
-        visit_count=visit_count+1
-        where id=?';
+            visit_count=visit_count+1
+            where id=?';
     $db->execute($sql, [$id]);
     $votes = $db->all_vote_by_user_id_and_t_id(user_id(), $id);
     $my_votes = [];
     foreach ($votes as $vote) {
         $my_votes[$vote['attitude']] = $vote;
     }
-    render(compact('thread', 'comments', 'my_votes'));
+    $is_my_fav = intval($db->get_fav_by_user_id_and_t_id(user_id(), $id));
+    $fav_text_map = ['加入收藏', '取消收藏'];
+    $data = compact(
+        'thread', 'comments', 'my_votes', 'is_my_fav', 'fav_text_map');
+    render($data);
 }
 function post_comment($t_id)
 {
@@ -262,4 +266,26 @@ function search()
             'gws_rd' => 'ssl',
         ]);
     header("Location:$Location");
+}
+function fav_thread($t_id)
+{
+    global $db;
+    $user_id = user_id();
+    $fav = $db->get_fav_by_user_id_and_t_id($user_id, $t_id);
+    $action = filter_input(INPUT_POST, 'value', FILTER_VALIDATE_BOOLEAN);
+    if ($action) {
+        if ($fav) {
+            return echo_json(1, 'u have fav it');
+        } else {
+            $data = compact('user_id', 't_id');
+            $db->insert('fav', $data);
+        }
+    } else {
+        if ($fav) {
+            $db->update('fav', ['is_delete' => 1], compact('t_id'));
+        } else {
+            return echo_json(1, 'u do not have fav it');
+        }
+    }
+    echo_json(0);
 }

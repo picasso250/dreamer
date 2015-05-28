@@ -23,6 +23,8 @@
 			次点击</span>
 	</div>
 	<div><?= htmlspecialchars($thread['content']) ?></div>
+	<button id="FavBtn" data-value="<?= 1 - $is_my_fav ?>">
+		<?= $fav_text_map[$is_my_fav] ?></button>
 </div>
 
 <form action="/post_comment/<?= $thread['id'] ?>">
@@ -53,6 +55,17 @@ $(function () {
 		}
 		$.post('/vote_thread/<?= $thread["id"] ?>', data, function(ret) {
 			$this.find('span').text(ret.data.num);
+		}, 'json')
+	})
+	$('#FavBtn').click(function() {
+		var $this = $(this);
+		var value = $this.data('value');
+		$this.prop('disabled', true);
+		var data = {
+			value: value
+		}
+		$.post('/fav_thread/<?= $thread["id"] ?>', data, function(ret) {
+			$this.text('spa')
 		}, 'json')
 	})
 });
