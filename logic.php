@@ -7,20 +7,22 @@ function all_thread($where)
     if ($where) {
         $where_str .= " WHERE ".$db::buildWhere($where);
     }
-    $sql = "SELECT t.*,u.name username,u.email, n.name node_name
-        from thread t 
-        inner join user u on u.id=t.user_id 
-        left join node n on n.id=t.node_id
-        $where_str
-        order by action_time desc limit 111";
+    $sql = "SELECT t.*, u.name username, u.email, n.name node_name
+            from thread t 
+            inner join user u on u.id=t.user_id 
+            left  join node n on n.id=t.node_id
+            $where_str
+            order by action_time desc limit 111";
     return $list = $db->queryAll($sql, $where);
 }
 function get_thread($id)
 {
     global $db;
-    $sql = "SELECT t.*,u.name username, u.email
-            from thread t join user u on u.id=t.user_id
-            where t.id=? limit 1";
+    $sql = "SELECT t.*, u.name username, u.email, n.name node_name
+            from thread t 
+            inner join user u on u.id=t.user_id
+            left  join node n on n.id=t.node_id
+            WHERE t.id=? limit 1";
     return $thread = $db->queryRow($sql, [$id]);
 }
 function all_comment($t_id)

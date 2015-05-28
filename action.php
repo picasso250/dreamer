@@ -241,3 +241,13 @@ function node($id)
     $total = $db->count_thread_by_node_id($id);
     render(compact('list', 'node', 'total'));
 }
+function search()
+{
+    $kw = isset($_GET['kw']) ? $_GET['kw'] : '';
+    $Location = "https://www.google.com/search?"
+        . http_build_query([
+            'q' => "site:$_SERVER[HTTP_HOST] $kw",
+            'gws_rd' => 'ssl',
+        ]);
+    header("Location:$Location");
+}
