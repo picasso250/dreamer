@@ -22,4 +22,20 @@ if ($user_id) {
     $cur_user = $db->get_user_by_id($user_id);
 }
 
+$login_check_router_list = [
+    'setting',
+    'post',
+    'post_new',
+    'fav',
+    'post_comment',
+    'vote_thread',
+    'fav_thread',
+    'change_password',
+    'append',
+    'append_thread',
+];
+if (in_array($router, $login_check_router_list) && !$user_id) {
+    die("u need login");
+}
+
 run($router, $args);

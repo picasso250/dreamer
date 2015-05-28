@@ -1,4 +1,5 @@
 <?php
+
 function user_id($user_id=null)
 {
     if ($user_id === null) {
