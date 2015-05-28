@@ -1,13 +1,3 @@
-CREATE TABLE `thread` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(255) NOT NULL,
-  `content` TEXT NULL,
-  `create_time` TIMESTAMP NULL,
-  PRIMARY KEY (`id`));
-ALTER TABLE `dreamer`.`thread` 
-CHANGE COLUMN `create_time` `create_time` TIMESTAMP NOT NULL ;
-ALTER TABLE `dreamer`.`thread` 
-ADD COLUMN `action_time` TIMESTAMP NOT NULL AFTER `create_time`;
 CREATE TABLE `dreamer`.`user` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
@@ -18,8 +8,6 @@ ALTER TABLE `dreamer`.`user`
 ADD COLUMN `password` VARCHAR(145) NOT NULL AFTER `create_time`;
 INSERT INTO `dreamer`.`user` (`name`, `password`)
  VALUES ('xiaochi', sha1('xiaochi'));
-ALTER TABLE `dreamer`.`thread` 
-ADD COLUMN `user_id` INT UNSIGNED NOT NULL AFTER `action_time`;
 CREATE TABLE `dreamer`.`comment` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `content` TEXT NULL,
@@ -28,8 +16,6 @@ CREATE TABLE `dreamer`.`comment` (
   PRIMARY KEY (`id`));
 ALTER TABLE `dreamer`.`comment` 
 ADD COLUMN `t_id` INT UNSIGNED NOT NULL AFTER `create_time`;
-ALTER TABLE `dreamer`.`thread` 
-ADD COLUMN `comment_count` SMALLINT UNSIGNED NOT NULL AFTER `user_id`;
 CREATE TABLE `dreamer`.`node` (
   `id` INT NOT NULL,
   `name` VARCHAR(45) NULL,
@@ -40,9 +26,25 @@ ALTER TABLE `dreamer`.`node`
 CHANGE COLUMN `creat_time` `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ;
 ALTER TABLE `dreamer`.`node` 
 CHANGE COLUMN `name` `name` VARCHAR(45) NOT NULL ;
-ALTER TABLE `thread` 
-ADD COLUMN `node_id` INT UNSIGNED NOT NULL AFTER `create_time`;
 ALTER TABLE `dreamer`.`node` 
 CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ;
 ALTER TABLE `dreamer`.`node` 
 ADD COLUMN `user_id` INT UNSIGNED NOT NULL AFTER `create_time`;
+CREATE TABLE `thread` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` text,
+  `node_id` int(10) unsigned NOT NULL,
+  `action_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_id` int(10) unsigned NOT NULL,
+  `comment_count` smallint(5) unsigned NOT NULL,
+  `visit_count` int(10) unsigned NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `dreamer`.`vote` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `t_id` INT UNSIGNED NOT NULL,
+  `attitude` TINYINT NOT NULL,
+  PRIMARY KEY (`id`));

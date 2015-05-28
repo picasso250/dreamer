@@ -75,8 +75,13 @@ function logout()
 }
 function thread($id)
 {
+    global $db;
     $thread = get_thread($id);
     $comments = all_comment($id);
+    $sql = 'UPDATE thread set 
+        visit_count=visit_count+1
+        where id=?';
+    $db->execute($sql, [$id]);
     render(compact('thread', 'comments'));
 }
 function post_comment($t_id)

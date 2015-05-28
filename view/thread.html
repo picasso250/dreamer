@@ -1,6 +1,11 @@
 <div>
 	<h3><?= htmlspecialchars($thread['title']) ?></h3>
-	<div><?= htmlspecialchars($thread['create_time']) ?></div>
+	<div>
+		<a href="/user/<?= $thread['user_id'] ?>"><?= $thread['username'] ?></a>
+		<span><?= htmlspecialchars($thread['create_time']) ?></span>
+		<span><?= htmlspecialchars($thread['visit_count']) ?>
+			次点击</span>
+	</div>
 	<div><?= htmlspecialchars($thread['content']) ?></div>
 </div>
 

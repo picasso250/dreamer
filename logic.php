@@ -20,7 +20,9 @@ function all_thread($node_id = null)
 function get_thread($id)
 {
     global $db;
-    $sql = "SELECT t.*,u.name username, u.email from thread t join user u on u.id=t.user_id where t.id=? limit 1";
+    $sql = "SELECT t.*,u.name username, u.email
+            from thread t join user u on u.id=t.user_id
+            where t.id=? limit 1";
     return $thread = $db->queryRow($sql, [$id]);
 }
 function all_comment($t_id)
