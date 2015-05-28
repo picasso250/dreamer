@@ -94,7 +94,8 @@ function thread($id)
     $thread = get_thread($id);
     $comments = all_comment($id);
     $sql = 'UPDATE thread set 
-            visit_count=visit_count+1
+            visit_count=visit_count+1,
+            hot=hot+1
             where id=?';
     $db->execute($sql, [$id]);
     $votes = $db->all_vote_by_user_id_and_t_id(user_id(), $id);
@@ -120,9 +121,10 @@ function post_comment($t_id)
     $data['user_id'] = user_id();
     $id = $db->insert('comment', $data);
     $sql = 'UPDATE thread set 
-        comment_count=comment_count+1,
-        action_time=?
-        where id=?';
+            comment_count=comment_count+1,
+            hot=hot+10,
+            action_time=?
+            where id=?';
     $db->execute($sql, [$db::timestamp(), $t_id]);
     return \echo_json(compact('id'));
 }
@@ -279,14 +281,20 @@ function fav_thread($t_id)
             $data = compact('user_id', 't_id');
             $db->insert('fav', $data);
         }
+        $hot = "hot=hot+100";
     } else {
         if ($fav) {
             $db->update('fav', ['is_delete' => 1], compact('t_id'));
         } else {
             return echo_json(1, 'u do not have fav it');
         }
+        $hot = "hot=hot-100";
     }
-    $db->update('thread', ['action_time' => $db::timestamp()], ['id' => $t_id]);
+    $data = [
+        'action_time' => $db::timestamp(),
+        $hot,
+    ];
+    $db->update('thread', $data, ['id' => $t_id]);
     echo_json(0);
 }
 function fav()

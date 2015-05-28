@@ -61,3 +61,5 @@ ALTER TABLE `dreamer`.`fav`
 ADD COLUMN `create_time` TIMESTAMP NOT NULL AFTER `t_id`;
 ALTER TABLE `dreamer`.`fav` 
 ADD COLUMN `is_delete` TINYINT UNSIGNED NOT NULL AFTER `create_time`;
+ALTER TABLE `dreamer`.`thread` 
+ADD COLUMN `hot` INT UNSIGNED NOT NULL AFTER `root_node_id`;
