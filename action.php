@@ -288,3 +288,17 @@ function fav_thread($t_id)
     }
     echo_json(0);
 }
+function fav()
+{
+    global $db;
+    $user_id = user_id();
+    $sql = "SELECT t.*, u.name username, u.email, n.name node_name
+            from thread t 
+            inner join user u on u.id=t.user_id 
+            left  join node n on n.id=t.node_id
+            inner join fav f on f.t_id=t.id
+            where f.user_id=?
+            order by f.id desc limit 111";
+    $list = $db->queryAll($sql, [$user_id]);
+    render(compact('list'));
+}
