@@ -50,3 +50,5 @@ CREATE TABLE `dreamer`.`vote` (
   PRIMARY KEY (`id`));
 ALTER TABLE `dreamer`.`node` 
 ADD COLUMN `description` VARCHAR(255) NULL AFTER `user_id`;
+ALTER TABLE `dreamer`.`thread` 
+ADD COLUMN `root_node_id` INT UNSIGNED NOT NULL AFTER `vote_against`;

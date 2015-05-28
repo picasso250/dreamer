@@ -40,6 +40,8 @@ function post()
         $node_id = $_POST['node_id'];
     }
     $data['node_id'] = $node_id;
+    $root = root_node($node_id);
+    $data['root_node_id'] = $root['id'];
     $id = $db->insert('thread', $data);
     return \echo_json(['url' => "/thread/$id"]);
 }

@@ -113,3 +113,14 @@ function ensure_node_name($node_name)
     }
     return $node_id;
 }
+function root_node($node_id)
+{
+    global $db;
+    while (true) {
+        $node = $db->get_node_by_id($node_id);
+        $node_id = $node['pid'];
+        if ($node_id === 0) {
+            return $node;
+        }
+    }
+}
