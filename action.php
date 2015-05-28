@@ -192,3 +192,25 @@ function post_new()
     $nodes = $db->get_all_node(100);
     render(compact('nodes'));
 }
+function vote_thread($t_id)
+{
+    global $db;
+    if (empty($_POST['value'])) {
+        return echo_json(1, 'no value');
+    }
+    $value = $_POST['value'];
+    $db->insert('vote', [
+        'user_id' => user_id(),
+        't_id' => $t_id,
+        'attitude' => $value,
+    ]);
+    $thread = $db->get_thread_by_id($t_id);
+    $map = [
+        1 => 'vote_for',
+        -1 => 'vote_against',
+    ];
+    $field = $map[$value];
+    $num = $thread[$field] + 1;
+    $db->update('thread', [$field => $num], ['id' => $t_id]);
+    echo_json(compact('num'));
+}

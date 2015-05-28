@@ -1,6 +1,10 @@
 <div>
 	<h3><?= htmlspecialchars($thread['title']) ?></h3>
 	<div>
+		<button class="vote-btn" id="VoteForBtn" data-value="1">顶
+			<span><?= $thread['vote_for'] ?></span>
+		</button>
+		<button class="vote-btn" id="VoteAgainstBtn" data-value="-1">踩</button>
 		<a href="/user/<?= $thread['user_id'] ?>"><?= $thread['username'] ?></a>
 		<span><?= htmlspecialchars($thread['create_time']) ?></span>
 		<span><?= htmlspecialchars($thread['visit_count']) ?>
@@ -27,6 +31,18 @@ $(function () {
 			$('#MainList').load("/comment_list/<?= $thread['id'] ?>");
 			$('input,textarea').val('');
 		}
+	})
+	$('.vote-btn').click(function (){
+		var $this = $(this);
+		var value = $this.data('value');
+		$this.attr('disable', true);
+		var data = {
+			value: value
+		}
+		$.post('/vote_thread/<?= $thread["id"] ?>', data, function(ret) {
+			$this.find('span').text(ret.data.num);
+			$this.attr('disable', false);
+		}, 'json')
 	})
 });
 </script>
