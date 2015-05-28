@@ -198,8 +198,13 @@ function change_password()
 function post_new()
 {
     global $db;
-    $nodes = $db->all_node(100);
-    render(compact('nodes'));
+    if (!empty($_GET['node'])) {
+        $nodes = $db->all_node(100);
+        $node_id = $_GET['node'];
+    } else {
+        $node_id = 0;
+    }
+    render(compact('nodes', 'node_id'));
 }
 function vote_thread($t_id)
 {

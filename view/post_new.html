@@ -4,12 +4,17 @@
 	<br>
 	<textarea name="content"></textarea>
 	<br>
-	<input name="node_name" placeholder="节点">
-	<select name="node_id">
-		<option value="0">手工填写</option>
-		<?php foreach ($nodes as $node): ?>
-		<option value="<?= $node['id'] ?>"><?= $node['name'] ?></option>
-		<?php endforeach ?>
-	</select>
-	<button>ok</button>
+	<?php if ($node_id): ?>
+		<input type="hidden" name="node_id" value="<?= $node_id ?>">
+	<?php else: ?>
+		<input name="node_name" placeholder="节点">
+		<select name="node_id">
+			<option value="0">手工填写</option>
+			<?php foreach ($nodes as $node): ?>
+			<option value="<?= $node['id'] ?>"><?= $node['name'] ?></option>
+			<?php endforeach ?>
+		</select>
+	<?php endif ?>
+	<br>
+	<button type="submit">发布</button>
 </form>

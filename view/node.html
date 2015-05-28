@@ -4,6 +4,8 @@
 	<?= $total ?>
 </div>
 <div><?= $node['description'] ?></div>
+<a href="/post_new?node=<?= $node['id'] ?>">创建新主题</a>
+
 <ul id="MainList">
 <?php include 'thread_list.html' ?>
 </ul>
