@@ -205,10 +205,10 @@ function post_new()
 {
     global $db;
     if (!empty($_GET['node'])) {
-        $nodes = $db->all_node(100);
         $node_id = $_GET['node'];
     } else {
         $node_id = 0;
+        $nodes = $db->all_node(100);
     }
     render(compact('nodes', 'node_id'));
 }

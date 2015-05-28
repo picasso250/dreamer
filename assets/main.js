@@ -3,7 +3,8 @@ $.fn.extend({
 		var $button = $(this);
 		if (state === 'loading') {
 			$button.prop('disabled', true);
-			var old = $button.text('...');
+			var old = $button.text();
+			$button.text('...');
 			$button.data('old', old)
 		}
 		if (state === 'reset') {
