@@ -1,5 +1,7 @@
 <?php
 
+$start_time = microtime(true);
+
 require 'xiaochi-db/src/DB.php';
 require 'lib.php';
 require 'account.php';

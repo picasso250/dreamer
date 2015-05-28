@@ -26,6 +26,16 @@
 		<button>搜索</button>
 	</form>
 </header>
+
 <?php include "$GLOBALS[router].html" ?>
+
+<footer>
+<div>Made by xiaochi</div>
+<div>
+	<?= intval((microtime(true) - $GLOBALS['start_time']) * 1000) ?>
+	ms
+</div>
+</footer>
+
 </body>
 </html>
