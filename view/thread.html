@@ -35,13 +35,12 @@ $(function () {
 	$('.vote-btn').click(function (){
 		var $this = $(this);
 		var value = $this.data('value');
-		$this.attr('disable', true);
+		$this.prop('disabled', true);
 		var data = {
 			value: value
 		}
 		$.post('/vote_thread/<?= $thread["id"] ?>', data, function(ret) {
 			$this.find('span').text(ret.data.num);
-			$this.attr('disable', false);
 		}, 'json')
 	})
 });
