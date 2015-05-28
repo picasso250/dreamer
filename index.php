@@ -4,9 +4,10 @@ $start_time = microtime(true);
 
 require 'xiaochi-db/src/DB.php';
 require 'lib.php';
-require 'account.php';
-require 'logic.php';
-require 'action.php';
+require 'logic/main.php';
+require 'logic/account.php';
+require 'action/main.php';
+require 'action/account.php';
 
 list($router, $args) = get_router();
 
