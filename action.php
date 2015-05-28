@@ -316,7 +316,7 @@ function new_user()
 {
     global $db;
     if (empty($_POST['email']) && empty($_POST['username'])) {
-        return echo_json(1, 'email or username, at list one');
+        return echo_json(1, 'email or username, at least one');
     }
     $data = [];
     if (!empty($_POST['email'])) {
@@ -332,8 +332,9 @@ function new_user()
         }
     }
     if (empty($_POST['password'])) {
-        $data['password'] = sha1($_POST['password']);
+        return echo_json(1, 'password need');
     }
+    $data['password'] = sha1($_POST['password']);
     $id = $db->insert('user', $data);
     echo_json(compact('id'));
 }
