@@ -8,11 +8,23 @@
 
 <div>
 <?php foreach ($nodes as $node): ?>
-	<a href="?<?= http_build_query(['tab' => $node['id']]) ?>"
+	<a href="?tab=<?= $node['id'] ?>"
 		class="tab <?php if ($tab === $node['id']): ?>on<?php endif ?>"
 		><?= $node['name'] ?></a>
 <?php endforeach ?>
 </div>
+<?php if ($sub_nodes): ?>
+	<div>
+	<?php foreach ($sub_nodes as $n): ?>
+	<a href="?<?= http_build_query([
+						'tab' => $n['pid'],
+						'subtab' => $n['id']
+					]) ?>"
+		class="tab <?php if ($subtab === $n['id']): ?>on<?php endif ?>"
+		><?= $n['name'] ?></a>
+	<?php endforeach ?>
+	</div>
+<?php endif ?>
 <ul id="MainList">
 <?php include 'thread_list.html' ?>
 </ul>

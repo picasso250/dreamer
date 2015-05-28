@@ -8,7 +8,12 @@ function index()
     $tab = isset($_GET['tab']) ? $_GET['tab'] : null;
     $list = \all_thread($tab);
     $nodes = $db->queryAll("SELECT * from node where pid=0 limit 111");
-    render(compact('list', 'nodes', 'tab'));
+    $sub_nodes = [];
+    if ($tab) {
+        $sub_nodes = $db->all_node_by_pid($tab);
+    }
+    $subtab = isset($_GET['subtab']) ? $_GET['subtab'] : null;
+    render(compact('list', 'nodes', 'tab', 'subtab', 'sub_nodes'));
 }
 function thread_list()
 {
@@ -194,7 +199,7 @@ function change_password()
 function post_new()
 {
     global $db;
-    $nodes = $db->get_all_node(100);
+    $nodes = $db->all_node(100);
     render(compact('nodes'));
 }
 function vote_thread($t_id)
