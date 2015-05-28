@@ -34,16 +34,7 @@ function post()
     $data = compact('title', 'content');
     $data['user_id'] = user_id();
     $data['action_time'] = $db::timestamp();
-    if (empty($_POST['node_id'])) {
-        $node_id = 0;
-        if (!empty($_POST['node_name'])) {
-            $node_name = trim($_POST['node_name']);
-            $node_id = ensure_node_name($node_name);
-        }
-    } else {
-        $node_id = $_POST['node_id'];
-    }
-    $data['node_id'] = $node_id;
+    $data['node_id'] = $node_id = node_id_input();
     if ($node_id) {
         $root = root_node($node_id);
         $data['root_node_id'] = $root['id'];
