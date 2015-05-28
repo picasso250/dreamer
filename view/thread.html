@@ -57,6 +57,7 @@ $(function () {
 			$this.find('span').text(ret.data.num);
 		}, 'json')
 	})
+	var map = <?= json_encode($fav_text_map) ?>;
 	$('#FavBtn').click(function() {
 		var $this = $(this);
 		var value = $this.data('value');
@@ -65,7 +66,8 @@ $(function () {
 			value: value
 		}
 		$.post('/fav_thread/<?= $thread["id"] ?>', data, function(ret) {
-			$this.text('spa')
+			$this.text(map[value]);
+			$this.prop('disabled', false);
 		}, 'json')
 	})
 });

@@ -104,7 +104,8 @@ function thread($id)
     foreach ($votes as $vote) {
         $my_votes[$vote['attitude']] = $vote;
     }
-    $is_my_fav = intval($db->get_fav_by_user_id_and_t_id(user_id(), $id));
+    $fav = $db->get_fav_by_user_id_and_t_id(user_id(), $id);
+    $is_my_fav = $fav ? (1 - $fav['is_delete']) : 0;
     $fav_text_map = ['加入收藏', '取消收藏'];
     $data = compact(
         'thread', 'comments', 'my_votes', 'is_my_fav', 'fav_text_map');
@@ -275,7 +276,7 @@ function fav_thread($t_id)
     $action = filter_input(INPUT_POST, 'value', FILTER_VALIDATE_BOOLEAN);
     if ($action) {
         if ($fav) {
-            return echo_json(1, 'u have fav it');
+            $db->update('fav', ['is_delete' => 0], compact('t_id'));
         } else {
             $data = compact('user_id', 't_id');
             $db->insert('fav', $data);
