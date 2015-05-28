@@ -1,4 +1,9 @@
-<?= $node['name'] ?>
+<h3><?= $node['name'] ?></h3>
+<div class="">
+	主题总数
+	<?= $total ?>
+</div>
+<div><?= $node['description'] ?></div>
 <ul id="MainList">
 <?php include 'thread_list.html' ?>
 </ul>

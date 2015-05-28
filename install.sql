@@ -48,3 +48,5 @@ CREATE TABLE `dreamer`.`vote` (
   `t_id` INT UNSIGNED NOT NULL,
   `attitude` TINYINT NOT NULL,
   PRIMARY KEY (`id`));
+ALTER TABLE `dreamer`.`node` 
+ADD COLUMN `description` VARCHAR(255) NULL AFTER `user_id`;

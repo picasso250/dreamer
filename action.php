@@ -232,5 +232,6 @@ function node($id)
     global $db;
     $node = $db->get_node_by_id($id);
     $list = all_thread($id);
-    render(compact('list', 'node'));
+    $total = $db->count_thread_by_node_id($id);
+    render(compact('list', 'node', 'total'));
 }
