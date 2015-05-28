@@ -1,5 +1,15 @@
 <?php
 
+function _all_thread($extra, $values=[])
+{
+    global $db;
+    $sql = "SELECT t.*, u.name username, u.email, n.name node_name
+            from thread t 
+            inner join user u on u.id=t.user_id 
+            left  join node n on n.id=t.node_id
+            $extra";
+    return $list = $db->queryAll($sql, $values);
+}
 function all_thread($where)
 {
     global $db;
@@ -7,13 +17,7 @@ function all_thread($where)
     if ($where) {
         $where_str .= " WHERE ".$db::buildWhere($where);
     }
-    $sql = "SELECT t.*, u.name username, u.email, n.name node_name
-            from thread t 
-            inner join user u on u.id=t.user_id 
-            left  join node n on n.id=t.node_id
-            $where_str
-            order by action_time desc limit 111";
-    return $list = $db->queryAll($sql, $where);
+    return _all_thread("$where_str ORDER BY action_time DESC LIMIT 111", $where);
 }
 function get_thread($id)
 {
@@ -29,7 +33,8 @@ function all_comment($t_id)
 {
     global $db;
     $sql = "SELECT c.*,u.name username, u.email 
-            from comment c inner join user u on u.id=c.user_id where c.t_id=?";
+            from comment c inner join user u on u.id=c.user_id 
+            where c.t_id=?";
     return $comments = $db->queryAll($sql, [$t_id]);
 }
 function send_mail($to, $subject, $body, $AltBody = null) {
@@ -45,7 +50,7 @@ function send_mail($to, $subject, $body, $AltBody = null) {
     $mail->Host = 'smtp.qq.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = '281055003@qq.com';                 // SMTP username
-    $mail->Password = Service('config')['mail']['password'];                           // SMTP password
+    $mail->Password = $config['mail']['password'];                           // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;                                    // TCP port to connect to
 
