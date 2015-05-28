@@ -18,7 +18,7 @@ $(function () {
 		if (ret.code === 0) {
 			if (ret.data && ret.data.url) {
 				location.href = ret.data.url;
-				return;
+				return false;
 			}
 		}
 	})
