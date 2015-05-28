@@ -23,7 +23,7 @@ if ($path === '/') {
 $config = require 'config.php';
 $dbc = $config['db'];
 $db = new \xiaochi\DB($dbc['dsn'], $dbc['username'], $dbc['password']);
-$db->deubg = $dbc['debug'];
+$db->debug = $dbc['debug'];
 
 session_start();
 $user_id = user_id();

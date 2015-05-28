@@ -6,7 +6,11 @@ function index()
 {
     global $db;
     $tab = isset($_GET['tab']) ? $_GET['tab'] : null;
-    $list = \all_thread($tab);
+    $where = [];
+    if ($tab) {
+        $where['root_node_id'] = $tab;
+    }
+    $list = \all_thread($where);
     $nodes = $db->queryAll("SELECT * from node where pid=0 limit 111");
     $sub_nodes = [];
     if ($tab) {
@@ -238,7 +242,7 @@ function node($id)
 {
     global $db;
     $node = $db->get_node_by_id($id);
-    $list = all_thread($id);
+    $list = all_thread(['node_id' => $id]);
     $total = $db->count_thread_by_node_id($id);
     render(compact('list', 'node', 'total'));
 }

@@ -1,21 +1,19 @@
 <?php
 
-function all_thread($node_id = null)
+function all_thread($where)
 {
     global $db;
-    $values = [];
-    $where = '';
-    if ($node_id) {
-        $where .= " WHERE node_id=? ";
-        $values[] = $node_id;
+    $where_str = '';
+    if ($where) {
+        $where_str .= " WHERE ".$db::buildWhere($where);
     }
     $sql = "SELECT t.*,u.name username,u.email, n.name node_name
         from thread t 
         inner join user u on u.id=t.user_id 
         left join node n on n.id=t.node_id
-        $where
+        $where_str
         order by action_time desc limit 111";
-    return $list = $db->queryAll($sql, $values);
+    return $list = $db->queryAll($sql, $where);
 }
 function get_thread($id)
 {
@@ -119,7 +117,7 @@ function root_node($node_id)
     while (true) {
         $node = $db->get_node_by_id($node_id);
         $node_id = $node['pid'];
-        if ($node_id === 0) {
+        if (empty($node_id)) {
             return $node;
         }
     }
