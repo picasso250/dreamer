@@ -1,35 +1,28 @@
-CREATE TABLE `dreamer`.`user` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `email` VARCHAR(145) NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`));
-ALTER TABLE `dreamer`.`user` 
-ADD COLUMN `password` VARCHAR(145) NOT NULL AFTER `create_time`;
-INSERT INTO `dreamer`.`user` (`name`, `password`)
- VALUES ('xiaochi', sha1('xiaochi'));
-CREATE TABLE `dreamer`.`comment` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `content` TEXT NULL,
-  `user_id` INT UNSIGNED NOT NULL,
-  `create_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`));
-ALTER TABLE `dreamer`.`comment` 
-ADD COLUMN `t_id` INT UNSIGNED NOT NULL AFTER `create_time`;
-CREATE TABLE `dreamer`.`node` (
-  `id` INT NOT NULL,
-  `name` VARCHAR(45) NULL,
-  `pid` INT UNSIGNED NOT NULL,
-  `creat_time` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`id`));
-ALTER TABLE `dreamer`.`node` 
-CHANGE COLUMN `creat_time` `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ;
-ALTER TABLE `dreamer`.`node` 
-CHANGE COLUMN `name` `name` VARCHAR(45) NOT NULL ;
-ALTER TABLE `dreamer`.`node` 
-CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ;
-ALTER TABLE `dreamer`.`node` 
-ADD COLUMN `user_id` INT UNSIGNED NOT NULL AFTER `create_time`;
+CREATE TABLE `comment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `content` text,
+  `user_id` int(10) unsigned NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `t_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `fav` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `t_id` int(10) unsigned NOT NULL,
+  `is_delete` tinyint(3) unsigned NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `node` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `pid` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `thread` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -39,27 +32,25 @@ CREATE TABLE `thread` (
   `user_id` int(10) unsigned NOT NULL,
   `comment_count` smallint(5) unsigned NOT NULL,
   `visit_count` int(10) unsigned NOT NULL,
+  `vote_for` int(10) unsigned NOT NULL,
+  `vote_against` int(10) unsigned NOT NULL,
+  `root_node_id` int(10) unsigned NOT NULL,
+  `hot` int(10) unsigned NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `dreamer`.`vote` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` INT UNSIGNED NOT NULL,
-  `t_id` INT UNSIGNED NOT NULL,
-  `attitude` TINYINT NOT NULL,
-  PRIMARY KEY (`id`));
-ALTER TABLE `dreamer`.`node` 
-ADD COLUMN `description` VARCHAR(255) NULL AFTER `user_id`;
-ALTER TABLE `dreamer`.`thread` 
-ADD COLUMN `root_node_id` INT UNSIGNED NOT NULL AFTER `vote_against`;
-CREATE TABLE `dreamer`.`fav` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` INT UNSIGNED NOT NULL,
-  `t_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`));
-ALTER TABLE `dreamer`.`fav` 
-ADD COLUMN `create_time` TIMESTAMP NOT NULL AFTER `t_id`;
-ALTER TABLE `dreamer`.`fav` 
-ADD COLUMN `is_delete` TINYINT UNSIGNED NOT NULL AFTER `create_time`;
-ALTER TABLE `dreamer`.`thread` 
-ADD COLUMN `hot` INT UNSIGNED NOT NULL AFTER `root_node_id`;
+CREATE TABLE `user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `email` varchar(145) DEFAULT NULL,
+  `password` varchar(145) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `vote` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `t_id` int(10) unsigned NOT NULL,
+  `attitude` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
