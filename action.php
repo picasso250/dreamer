@@ -82,7 +82,12 @@ function thread($id)
         visit_count=visit_count+1
         where id=?';
     $db->execute($sql, [$id]);
-    render(compact('thread', 'comments'));
+    $votes = $db->all_vote_by_user_id_and_t_id(user_id(), $id);
+    $my_votes = [];
+    foreach ($votes as $vote) {
+        $my_votes[$vote['attitude']] = $vote;
+    }
+    render(compact('thread', 'comments', 'my_votes'));
 }
 function post_comment($t_id)
 {

@@ -1,10 +1,20 @@
 <div>
 	<h3><?= htmlspecialchars($thread['title']) ?></h3>
 	<div>
-		<button class="vote-btn" id="VoteForBtn" data-value="1">顶
+		<button class="vote-btn" id="VoteForBtn" data-value="1"
+			<?php if (isset($my_votes[1])): ?>
+				disabled
+				title="u have vote"
+			<?php endif ?>
+			>顶
 			<span><?= $thread['vote_for'] ?></span>
 		</button>
-		<button class="vote-btn" id="VoteAgainstBtn" data-value="-1">踩</button>
+		<button class="vote-btn" id="VoteAgainstBtn" data-value="-1"
+			<?php if (isset($my_votes[-1])): ?>
+				disabled
+				title="u have vote"
+			<?php endif ?>
+			>踩</button>
 		<a href="/user/<?= $thread['user_id'] ?>"><?= $thread['username'] ?></a>
 		<span><?= htmlspecialchars($thread['create_time']) ?></span>
 		<span><?= htmlspecialchars($thread['visit_count']) ?>
