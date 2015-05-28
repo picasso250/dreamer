@@ -2,6 +2,10 @@
 	<li>
 		<h3><a href="/thread/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['title']) ?></a></h3>
 		<div class="thread-detail-info">
+			<?php if ($thread['vote_for']): ?>
+				<span class="label"><?= $thread['vote_for'] ?>
+					赞</span>
+			<?php endif ?>
 			<div class="label"><?= htmlspecialchars($thread['node_name']); ?></div>
 			<a href="/user/<?= $thread['user_id'] ?>"><?= user_show_name($thread) ?></a>
 			<span><?= $thread['create_time'] ?></span>
