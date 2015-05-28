@@ -12,7 +12,6 @@ function index()
     if ($tab) {
         $sub_nodes = $db->all_node_by_pid($tab);
     }
-    $subtab = isset($_GET['subtab']) ? $_GET['subtab'] : null;
     render(compact('list', 'nodes', 'tab', 'subtab', 'sub_nodes'));
 }
 function thread_list()
@@ -227,4 +226,11 @@ function vote_thread($t_id)
     $num = $db->count_vote_by_user_id_and_attitude($user_id, $value);
     $db->update('thread', [$field => $num], ['id' => $t_id]);
     echo_json(compact('num'));
+}
+function node($id)
+{
+    global $db;
+    $node = $db->get_node_by_id($id);
+    $list = all_thread($id);
+    render(compact('list', 'node'));
 }
