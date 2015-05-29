@@ -4,6 +4,10 @@ body {
 	margin: 0;
 	font-family: "微软雅黑";
 }
+a {
+	text-decoration: none;
+	color: #444;
+}
 header {
 	height: 50px;
 	margin-bottom: 10px;
@@ -30,6 +34,12 @@ footer {
 	display: inline-block;
 	color: grey;
 	border-radius: 3px;
+}
+.label.btn {
+	cursor: pointer;
+}
+.label.btn:hover {
+	background-color: #ccc;
 }
 
 .control-bar {
@@ -167,4 +177,14 @@ table.status .label-desc {
 }
 #NodeAll {
 	margin: 10px;
+}
+#NodeAll .title {
+	font-size: small;
+	color: grey;
+	text-align: right;
+	width: 63px;
+}
+#NodeAll .detail a {
+	text-decoration: none;
+	color: #444;
 }

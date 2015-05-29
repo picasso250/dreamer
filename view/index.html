@@ -85,8 +85,8 @@ $(function () {
 	<table>
 		<?php foreach ($nodes as $node): ?>
 			<tr>
-				<td><?= $node['name'] ?></td>
-				<td>
+				<td class="title"><?= $node['name'] ?></td>
+				<td class="detail">
 					<?php foreach ($node['sub'] as $n): ?>
 						<a href="/node/<?= $n['id'] ?>"><?= $n['name'] ?></a>
 					<?php endforeach ?>

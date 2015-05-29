@@ -8,7 +8,7 @@
 				</span>
 				·
 			<?php endif ?>
-			<div class="label"><?= htmlspecialchars($thread['node_name']); ?></div>
+			<a class="label btn" href="/node/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['node_name']); ?></a>
 			·
 			<a href="/user/<?= $thread['user_id'] ?>"><?= user_show_name($thread) ?></a>
 			·
