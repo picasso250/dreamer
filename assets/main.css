@@ -4,6 +4,15 @@ body {
 	margin: 0;
 	font-family: "微软雅黑";
 }
+header {
+	height: 111px;
+	border-bottom: 1px solid;
+	margin-bottom: 10px;
+	background-color: rgb(90, 187, 184)
+}
+header h1 {
+	float: left;
+}
 .label {
 	font-size: small;
 	background-color: #ddd;
@@ -12,20 +21,7 @@ body {
 	color: grey;
 	border-radius: 3px;
 }
-.tab {
-	text-decoration: none;
-	width: 3em;
-	padding: 3px 4px;
-	display: inline-block;
-	text-align: center;
-}
-.tab:hover {
-	background-color: #eee;
-}
-.tab.on {
-	background-color: grey;
-	color: #fff;
-}
+
 .control-bar {
 	float: right;
 }
@@ -39,17 +35,39 @@ body {
 	clear: both;
 	margin-top: 10px;
 }
-header {
-	height: 111px;
-	border-bottom: 1px solid;
-	margin-bottom: 10px;
-	background-color: rgb(80, 216, 211);
-}
-header h1 {
-	float: left;
-}
+
 .node-navbar{
-	border: 1px solid;
+	width: 70%;
+	margin: auto;
+	margin-top: -40px;
+}
+.node-navbar-main{
+	background-color: #6B8284;
+	border-radius: 3px 3px 0 0;
+}
+.node-navbar-sub{
+	height: 41px;
+	line-height: 41px;
+}
+.node-navbar-sub a{
+	display: inline-block;
+	padding: 0 15px;
+}
+.tab {
+	text-decoration: none;
+	width: 3em;
+	padding: 9px 4px;
+	display: inline-block;
+	text-align: center;
+	color: #fff;
+	border-bottom: 5px solid rgba(0,0,0,0);
+}
+.tab:hover {
+	border-color: #fff;
+}
+.tab.on {
+	color: #fff;
+	border-color: #fff;
 }
 .index-search {
 	padding: 29px 139px;
@@ -61,6 +79,10 @@ header h1 {
 .no-list {
 	list-style: none;
 	padding: 0;
+}
+#MainList {
+	margin: 10px;
+	width: 577px;
 }
 #MainList li:first-child {
 	border-top: 1px solid;
@@ -104,4 +126,9 @@ table.status .label-desc {
 	box-shadow: 0px 1px 4px grey;
 	margin-bottom: 10px;
 	padding: 10px;
+}
+.paper {
+	background-color: #fff;
+	box-shadow: 0px 1px 4px grey;
+	border-radius: 3px;
 }

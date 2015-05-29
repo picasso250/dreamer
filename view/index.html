@@ -1,6 +1,6 @@
 
-
-<div class="node-navbar">
+<div class="node-navbar paper">
+<div class="node-navbar-main">
 <?php foreach ($nodes as $node): ?>
 	<a href="?tab=<?= $node['id'] ?>"
 		class="tab <?php if ($tab === $node['id']): ?>on<?php endif ?>"
@@ -9,13 +9,14 @@
 </div>
 
 <?php if ($sub_nodes): ?>
-	<div>
+	<div class="node-navbar-sub">
 	<?php foreach ($sub_nodes as $n): ?>
 	<a href="/node/<?= $n['id'] ?>"
 		><?= $n['name'] ?></a>
 	<?php endforeach ?>
 	</div>
 <?php endif ?>
+</div>
 
 <div class="right-bar">
 <?php if (user_id()): ?>
@@ -63,7 +64,7 @@
 </div>
 </div>
 
-<ul id="MainList" class="no-list">
+<ul id="MainList" class="no-list paper">
 <?php include 'thread_list.html' ?>
 </ul>
 
