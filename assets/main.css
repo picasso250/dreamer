@@ -5,13 +5,19 @@ body {
 	font-family: "微软雅黑";
 }
 header {
-	height: 111px;
-	border-bottom: 1px solid;
+	height: 50px;
 	margin-bottom: 10px;
-	background-color: rgb(90, 187, 184)
+	background-color: rgb(90, 187, 184);
+	padding: 20px;
 }
 header h1 {
 	float: left;
+	margin: 0;
+}
+footer {
+	text-align: center;
+	color: grey;
+	font-size: small;
 }
 .label {
 	font-size: small;
@@ -71,7 +77,7 @@ header h1 {
 	border-color: #fff;
 }
 .index-search {
-	padding: 29px 139px;
+	padding: 2px 139px;
 }
 .append-info{
 	border: 1px solid;
@@ -132,4 +138,24 @@ table.status .label-desc {
 	background-color: #fff;
 	box-shadow: 0px 1px 4px grey;
 	border-radius: 3px;
+}
+.split.paper h4 {
+	background-color: #fff;
+	color: #6E6E6E;
+	margin: 0;
+	padding: 15px 15px 10px 10px;
+	border-radius: 3px 3px 0 0;
+	box-shadow: 0px 1px 4px grey;
+	border-bottom: 1px solid #ddd;
+}
+.split.paper .body {
+	margin: 0;
+	margin-bottom: 10px;
+	background-color: #fff;
+	border-radius: 0 0 3px 3px;
+	padding: 10px 0;
+	box-shadow: 0px 1px 4px grey;
+}
+#NodeAll {
+	margin: 10px;
 }
