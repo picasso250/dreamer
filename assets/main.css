@@ -115,14 +115,14 @@ footer {
 	margin: 10px;
 	margin-right: 337px;
 }
-#MainList li:last-child {
+.thread-item:last-child {
 	border-bottom: 0px solid;
 }
-#MainList li {
+.thread-item {
 	border-bottom: 1px solid #ccc;
 	padding: 6px 10px;
 }
-#MainList li a {
+.thread-item a {
 	text-decoration: none;
 	color: #111;
 	font-weight: normal;
@@ -182,6 +182,9 @@ table.status .label-desc {
 	border-bottom: 1px solid #ddd;
 	font-size: medium;
 }
+.split.paper .title h3 {
+	margin: 0;
+}
 .split.paper .body {
 	margin: 0;
 	margin-bottom: 10px;
@@ -192,6 +195,7 @@ table.status .label-desc {
 }
 #NodeAll {
 	margin: 10px;
+	margin-right: 337px;
 }
 #NodeAll .title-desc {
 	font-size: small;
@@ -261,4 +265,8 @@ form.paper textarea{
 
 .hidden {
 	display: none;
+}
+
+#CountThread {
+	float: right;
 }

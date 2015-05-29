@@ -1,5 +1,5 @@
 <?php foreach ($list as $thread): ?>
-	<li>
+	<li class="thread-item">
 		<h3><a href="/thread/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['title']) ?></a></h3>
 		<div class="thread-detail-info">
 			<?php if ($thread['vote_for']): ?>
