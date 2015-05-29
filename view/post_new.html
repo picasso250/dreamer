@@ -1,7 +1,8 @@
-<form method="post" action="post" class="ajax">
+<form method="post" action="post" class="ajax page split paper">
+	<h2 class="title">创作新主题</h2>
+	<div class="body">
 	<div class="form-msg"></div>
-	<input name="title" placeholder="标题">
-	<br>
+	<input type="text" name="title" placeholder="标题">
 	<textarea name="content"></textarea>
 	<br>
 	<?php if ($node_id): ?>
@@ -17,4 +18,5 @@
 	<?php endif ?>
 	<br>
 	<button type="submit">发布</button>
+	</div>
 </form>

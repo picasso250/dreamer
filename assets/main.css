@@ -167,7 +167,10 @@ table.status .label-desc {
 	border-radius: 3px;
 	margin: 10px;
 }
-.split.paper h4 , .split.paper h3{
+.split.paper {
+	display: block;
+}
+.split.paper .title {
 	background-color: #fff;
 	color: #6E6E6E;
 	margin: 0;
@@ -175,6 +178,7 @@ table.status .label-desc {
 	border-radius: 3px 3px 0 0;
 	box-shadow: 0px 1px 4px grey;
 	border-bottom: 1px solid #ddd;
+	font-size: medium;
 }
 .split.paper .body {
 	margin: 0;
@@ -229,4 +233,13 @@ table.status .label-desc {
 	box-sizing: border-box;
 	border: 0px solid;
 	border-bottom: 1px solid #ccc;
+}
+form.page.paper .body {
+	padding: 10px;
+}
+form.paper input[type=text]{
+}
+form.paper input[type=text], form.paper textarea {
+	width: 100%;
+	box-sizing: border-box;
 }
