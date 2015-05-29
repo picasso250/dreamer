@@ -1,10 +1,4 @@
-<?php if (user_id()): ?>
-	<div>
-		<a href="/post_new">创建新主题</a>
-	</div>
-<?php else: ?>
-	<div>请先登录再发言</div>
-<?php endif ?>
+
 
 <div class="node-navbar">
 <?php foreach ($nodes as $node): ?>
@@ -13,6 +7,7 @@
 		><?= $node['name'] ?></a>
 <?php endforeach ?>
 </div>
+
 <?php if ($sub_nodes): ?>
 	<div>
 	<?php foreach ($sub_nodes as $n): ?>
@@ -23,41 +18,52 @@
 <?php endif ?>
 
 <div class="right-bar">
-<div class="">
+<?php if (user_id()): ?>
+	<div class="float-paper-uni">
+		<a href="/post_new">创建新主题</a>
+	</div>
+<?php else: ?>
+	<div>请先登录再发言</div>
+<?php endif ?>
+<div class="float-paper-uni">
 	<a href="/fav">
 		收藏
-		<?= $my_fav_count ?>
+		(<?= $my_fav_count ?>)
 	</a>
 </div>
 
-<div class="">
+<div class="float-paper">
 	<h4>今日热议主题</h4>
+	<div class="body">
 	<ol>
 	<?php foreach ($top10 as $thread): ?>
 		<li><a href="/thread/<?= $thread['id'] ?>"><?= $thread['title'] ?></a></li>
 	<?php endforeach ?>
 	</ol>
+	</div>
 </div>
-<div class="">
+<div class="float-paper">
 	<h4>社区运行状况</h4>
-	<table>
+	<div class="body">
+	<table class="status">
 		<tr>
-			<td>注册会员</td>
-			<td><?= $total_memeber ?></td>
+			<td class="label-desc">注册会员</td>
+			<td class="num"><?= $total_memeber ?></td>
 		</tr>
 		<tr>
-			<td>主题</td>
-			<td><?= $total_thread ?></td>
+			<td class="label-desc">主题</td>
+			<td class="num"><?= $total_thread ?></td>
 		</tr>
 		<tr>
-			<td>回复</td>
-			<td><?= $total_comment ?></td>
+			<td class="label-desc">回复</td>
+			<td class="num"><?= $total_comment ?></td>
 		</tr>
 	</table>
+	</div>
 </div>
 </div>
 
-<ul id="MainList">
+<ul id="MainList" class="no-list">
 <?php include 'thread_list.html' ?>
 </ul>
 

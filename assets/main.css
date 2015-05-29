@@ -1,3 +1,9 @@
+body {
+	background-color: #eee;
+	padding: 0;
+	margin: 0;
+	font-family: "微软雅黑";
+}
 .label {
 	font-size: small;
 	background-color: #ddd;
@@ -27,13 +33,17 @@
 	font-size: small;
 }
 .right-bar {
+	padding: 5px;
 	width: 311px;
 	float: right;
 	clear: both;
-	border: 1px solid;
+	margin-top: 10px;
 }
 header {
-	height: 78px;
+	height: 111px;
+	border-bottom: 1px solid;
+	margin-bottom: 10px;
+	background-color: rgb(80, 216, 211);
 }
 header h1 {
 	float: left;
@@ -47,4 +57,51 @@ header h1 {
 .append-info{
 	border: 1px solid;
 	padding: 3px;
+}
+.no-list {
+	list-style: none;
+	padding: 0;
+}
+#MainList li:first-child {
+	border-top: 1px solid;
+}
+#MainList li {
+	border-bottom: 1px solid;
+	padding: 6px 0px;
+}
+.float-paper{
+}
+.float-paper h4 {
+	background-color: #fff;
+	color: #6E6E6E;
+	margin: 0;
+	padding: 15px 15px 10px 10px;
+	border-radius: 3px 3px 0 0;
+	box-shadow: 0px 1px 4px grey;
+	border-bottom: 1px solid #ddd;
+}
+.float-paper .body {
+	margin: 0;
+	margin-bottom: 10px;
+	background-color: #fff;
+	border-radius: 0 0 3px 3px;
+	padding: 10px 0;
+	box-shadow: 0px 1px 4px grey;
+}
+table.status {
+	font-size: small;
+	width: 113px;
+}
+table.status .num {
+	font-weight: bold;
+}
+table.status .label-desc {
+	text-align: right;
+}
+.float-paper-uni{
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: 0px 1px 4px grey;
+	margin-bottom: 10px;
+	padding: 10px;
 }
