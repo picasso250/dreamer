@@ -264,7 +264,7 @@ form.page.paper .body {
 	width: 100%;
 	box-sizing: border-box;
 }
-form.paper textarea{
+form.paper textarea, form.body textarea{
 	height: 33em;
 	width: 100%;
 	box-sizing: border-box;

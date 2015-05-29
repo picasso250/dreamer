@@ -1,6 +1,8 @@
-<h3><a href="/thread/<?= $t_id ?>"><?= $thread['title'] ?></a></h3>
-<form action="/append_thread/<?= $t_id ?>" class="ajax">
-	<textarea name="append"></textarea>
-	<br>
-	<button type="submit">添加附言</button>
-</form>
+<div class="paper split">
+	<h3 class="title"><a href="/thread/<?= $t_id ?>"><?= $thread['title'] ?></a></h3>
+	<form action="/append_thread/<?= $t_id ?>" class="ajax body">
+		<textarea name="append"></textarea>
+		<br>
+		<button type="submit">添加附言</button>
+	</form>
+</div>
