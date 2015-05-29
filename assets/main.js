@@ -35,7 +35,11 @@ function ajax_form(form, callback)
 				return
 			}
 			$btn.button('reset');
-			postForm.find('.form-msg').text(ret.msg);
+			postForm.find('.form-msg')
+				.removeClass('ok')
+				.removeClass('error')
+				.addClass(ret.code === 0 ? 'ok' : 'error')
+				.text(ret.msg);
 		}, 'json');
 	});
 }
