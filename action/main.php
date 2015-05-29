@@ -120,11 +120,12 @@ function post_new()
     global $db;
     if (!empty($_GET['node'])) {
         $node_id = $_GET['node'];
+        $node = $db->get_node_by_id($node_id);
     } else {
         $node_id = 0;
         $nodes = $db->all_node(100);
     }
-    render(compact('nodes', 'node_id'));
+    render(compact('nodes', 'node_id', 'node'));
 }
 function vote_thread($t_id)
 {

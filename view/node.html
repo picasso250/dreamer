@@ -1,11 +1,17 @@
-<h3><?= $node['name'] ?></h3>
-<div class="">
-	主题总数
-	<?= $total ?>
+<div class="paper split">
+<div class="title">
+<div id="NodeDetail">
+	<div class="">
+		主题总数
+		<?= $total ?>
+	</div>
 </div>
-<div><?= $node['description'] ?></div>
-<a href="/post_new?node=<?= $node['id'] ?>">创建新主题</a>
+	<h3><?= $node['name'] ?></h3>
+	<a href="/post_new?node=<?= $node['id'] ?>">创建新主题</a>
+	<div><?= $node['description'] ?></div>
+</div>
 
-<ul id="MainList">
+<ul class="body">
 <?php include 'thread_list.html' ?>
 </ul>
+</div>

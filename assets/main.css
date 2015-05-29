@@ -290,6 +290,9 @@ form.paper textarea{
 .thread-node {
 	float: right;
 }
+#NodeDetail {
+	float: right;
+}
 
 @media screen and (min-width: 900px) {
 header {
