@@ -289,6 +289,9 @@ form.paper textarea{
 #CountThread {
 	float: right;
 }
+.thread-node {
+	float: right;
+}
 
 @media screen and (min-width: 900px) {
 header {
