@@ -1,6 +1,6 @@
 <?php foreach ($list as $thread): ?>
 	<li class="thread-item">
-		<a class="label btn thread-node" href="/node/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['node_name']); ?></a>
+		<a class="label btn thread-node" href="/node/<?= $thread['node_id'] ?>"><?= htmlspecialchars($thread['node_name']); ?></a>
 		<h3><a href="/thread/<?= $thread['id'] ?>"><?= htmlspecialchars($thread['title']) ?></a></h3>
 		<div class="thread-detail-info">
 			<?php if ($thread['vote_for']): ?>
