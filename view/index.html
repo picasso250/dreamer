@@ -26,12 +26,15 @@
 <?php else: ?>
 	<div class="float-paper-uni">请先登录再发言</div>
 <?php endif ?>
+
+<?php if (user_id()): ?>
 <div class="float-paper-uni">
 	<a href="/fav">
 		收藏
 		(<?= $my_fav_count ?>)
 	</a>
 </div>
+<?php endif ?>
 
 <div class="float-paper">
 	<h4>今日热议主题</h4>
@@ -92,12 +95,12 @@ $(function () {
 </script>
 
 <div class="paper split" id="NodeAll">
-	<h4>节点导航</h4>
+	<h4 class="title">节点导航</h4>
 	<div class="body">
 	<table>
 		<?php foreach ($nodes as $node): ?>
 			<tr>
-				<td class="title"><?= $node['name'] ?></td>
+				<td class="title-desc"><?= $node['name'] ?></td>
 				<td class="detail">
 					<?php foreach ($node['sub'] as $n): ?>
 						<a href="/node/<?= $n['id'] ?>"><?= $n['name'] ?></a>

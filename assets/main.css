@@ -193,7 +193,7 @@ table.status .label-desc {
 #NodeAll {
 	margin: 10px;
 }
-#NodeAll .title {
+#NodeAll .title-desc {
 	font-size: small;
 	color: grey;
 	text-align: right;
