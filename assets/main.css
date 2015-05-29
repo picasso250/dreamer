@@ -239,10 +239,12 @@ table.status .label-desc {
 form.page.paper .body {
 	padding: 10px;
 }
+#NewPostForm input[type=text] {
+	width: 100%;
+	box-sizing: border-box;
+}
 form.paper textarea{
 	height: 33em;
-}
-form.paper input[type=text], form.paper textarea {
 	width: 100%;
 	box-sizing: border-box;
 }
