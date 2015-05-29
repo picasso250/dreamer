@@ -8,4 +8,5 @@ return array(
         'debug' => true,
     ],
     'mail' => ['debug' => true],
+    'static_version' => 'xxx',
 );
