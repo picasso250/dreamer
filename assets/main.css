@@ -97,7 +97,7 @@ footer {
 	border-color: #fff;
 }
 .index-search {
-	padding: 2px 139px;
+	padding: 2px 157px;
 }
 .append-info{
 	border-top: 1px solid #bbb;
@@ -192,6 +192,9 @@ table.status .label-desc {
 	border-radius: 0 0 3px 3px;
 	padding: 10px 0;
 	box-shadow: 0px 1px 4px grey;
+}
+.split.paper form.body {
+	padding: 10px;
 }
 #NodeAll {
 	margin: 10px;
