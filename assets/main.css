@@ -27,6 +27,7 @@ header h1 {
 }
 .thread-detail-info {
 	font-size: small;
+	color: grey;
 }
 .right-bar {
 	padding: 5px;
@@ -84,12 +85,12 @@ header h1 {
 	margin: 10px;
 	width: 577px;
 }
-#MainList li:first-child {
-	border-top: 1px solid;
+#MainList li:last-child {
+	border-bottom: 0px solid;
 }
 #MainList li {
-	border-bottom: 1px solid;
-	padding: 6px 0px;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 10px;
 }
 .float-paper{
 }
