@@ -1,10 +1,13 @@
-<h3>我收藏的主题</h3>
 
-<div>
-	主题总数
-	<?= count($list) ?>
+<div class="paper split">
+	<div class="head">
+		<div>
+			主题总数
+			<?= count($list) ?>
+		</div>
+		<h3>我收藏的主题</h3>
+	</div>
+	<ul id="MainList" class="no-list body">
+	<?php include 'thread_list.html' ?>
+	</ul>
 </div>
-
-<ul id="MainList">
-<?php include 'thread_list.html' ?>
-</ul>

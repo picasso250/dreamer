@@ -13,6 +13,10 @@ header {
 	margin-bottom: 10px;
 	background-color: rgb(83, 189, 208);
 	padding: 20px;
+	color: #fff;
+}
+header a {
+	color: #fff;
 }
 header h1 {
 	float: left;
@@ -107,7 +111,7 @@ footer {
 }
 #MainList {
 	margin: 10px;
-	width: 602px;
+	margin-right: 337px;
 }
 #MainList li:last-child {
 	border-bottom: 0px solid;
