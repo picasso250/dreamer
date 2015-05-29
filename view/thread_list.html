@@ -4,11 +4,16 @@
 		<div class="thread-detail-info">
 			<?php if ($thread['vote_for']): ?>
 				<span class="label"><?= $thread['vote_for'] ?>
-					赞</span>
+					赞
+				</span>
+				·
 			<?php endif ?>
 			<div class="label"><?= htmlspecialchars($thread['node_name']); ?></div>
+			·
 			<a href="/user/<?= $thread['user_id'] ?>"><?= user_show_name($thread) ?></a>
+			·
 			<span><?= $thread['create_time'] ?></span>
+			·
 			<span>回帖数：<?= $thread['comment_count'] ?></span>
 		</div>
 	</li>

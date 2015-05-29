@@ -7,12 +7,16 @@ body {
 header {
 	height: 50px;
 	margin-bottom: 10px;
-	background-color: rgb(90, 187, 184);
+	background-color: rgb(83, 189, 208);
 	padding: 20px;
 }
 header h1 {
 	float: left;
 	margin: 0;
+}
+header h1 a {
+	text-decoration: none;
+	color: #fff;
 }
 footer {
 	text-align: center;
@@ -22,7 +26,7 @@ footer {
 .label {
 	font-size: small;
 	background-color: #ddd;
-	padding: 3px 0px;
+	padding: 3px 5px;
 	display: inline-block;
 	color: grey;
 	border-radius: 3px;
@@ -40,7 +44,7 @@ footer {
 	width: 311px;
 	float: right;
 	clear: both;
-	margin-top: 10px;
+	margin-top: 6px;
 }
 
 .node-navbar{
@@ -89,7 +93,7 @@ footer {
 }
 #MainList {
 	margin: 10px;
-	width: 577px;
+	width: 602px;
 }
 #MainList li:last-child {
 	border-bottom: 0px solid;
@@ -97,6 +101,11 @@ footer {
 #MainList li {
 	border-bottom: 1px solid #ccc;
 	padding: 6px 10px;
+}
+#MainList li a {
+	text-decoration: none;
+	color: #111;
+	font-weight: normal;
 }
 .float-paper{
 }
