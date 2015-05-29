@@ -1,7 +1,9 @@
 <?php foreach ($comments as $i => $comment): ?>
 	<li>
-		<a href="/user/<?= $comment['user_id'] ?>"><?= (user_show_name($comment)) ?></a>
-		<div><?= nl2br(htmlspecialchars($comment['content'])) ?></div>
-		<div><?= $comment['create_time'] ?></div>
+		<div class="detail-info">
+			<a href="/user/<?= $comment['user_id'] ?>"><?= (user_show_name($comment)) ?></a>
+			<?= $comment['create_time'] ?>
+		</div>
+		<div class="comment-content"><?= nl2br(htmlspecialchars($comment['content'])) ?></div>
 	</li>
 <?php endforeach ?>

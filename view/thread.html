@@ -1,7 +1,8 @@
-<div>
-	<a href="/node/<?= $thread['node_id'] ?>"><?= $thread['node_name'] ?></a>
+<div id="ThreadMain" class="paper">
+<div id="ThreadHead">
+	<a id="TreadNode" href="/node/<?= $thread['node_id'] ?>"><?= $thread['node_name'] ?></a>
 	<h3><?= htmlspecialchars($thread['title']) ?></h3>
-	<div>
+	<div class="detail-info">
 		<button class="vote-btn" id="VoteForBtn" data-value="1"
 			<?php if (isset($my_votes[1])): ?>
 				disabled
@@ -16,51 +17,60 @@
 				title="u have vote"
 			<?php endif ?>
 			>踩</button>
+		·
 		<a href="/user/<?= $thread['user_id'] ?>"><?= $thread['username'] ?></a>
+		·
 		<span><?= htmlspecialchars($thread['create_time']) ?></span>
+		·
 		<span>
 			<?= htmlspecialchars($thread['visit_count']) ?>
 			次点击
 		</span>
 		<?php if ($fav_count): ?>
+			·
 			<span>
 				<?= $fav_count ?>
 				人收藏
 			</span>
 		<?php endif ?>
+		·
+		<button id="FavBtn" data-value="<?= 1 - $is_my_fav ?>">
+			<?= $fav_text_map[$is_my_fav] ?></button>
 		<?php if ($thread['user_id'] == user_id()): ?>
+			·
 			<a href="/append/<?= $thread['id'] ?>">Append</a>
 		<?php endif ?>
 	</div>
+</div>
 
-	<hr>
-
-	<div><?= nl2br(htmlspecialchars($thread['content'])) ?></div>
+	<div id="ThreadContent"><?= nl2br(htmlspecialchars($thread['content'])) ?></div>
 	<?php foreach ($appends as $i => $append): ?>
 		<div class="append-info">
-			<div>
+			<div class="detail-info">
 				第
 				<?= $i+1 ?>
 				条附言
 				<?= $append['create_time'] ?>
 			</div>
-			<div><?= nl2br(htmlspecialchars($append['content'])) ?></div>
+			<div class="append-body"><?= nl2br(htmlspecialchars($append['content'])) ?></div>
 		</div>
 	<?php endforeach ?>
-	<button id="FavBtn" data-value="<?= 1 - $is_my_fav ?>">
-		<?= $fav_text_map[$is_my_fav] ?></button>
 </div>
 
-<form action="/post_comment/<?= $thread['id'] ?>">
-	<div class="form-msg"></div>
-	<textarea name="content"></textarea>
-	<button type="submit">评论</button>
-</form>
-
+<div id="CommentDiv" class="paper split">
 <h3>评论</h3>
-<ol id="MainList">
+<div class="body">
+<ul id="CommentList" class="no-list">
 <?php include 'comment_list.html' ?>
-</ol>
+</ul>
+	<form action="/post_comment/<?= $thread['id'] ?>">
+		<div class="form-msg"></div>
+		<textarea name="content" placeholder="有什么要说的？"></textarea>
+		<br>
+		<button type="submit">评论</button>
+	</form>
+</div>
+</div>
 
 <script type="text/javascript">
 $(function () {
