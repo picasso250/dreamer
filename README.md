@@ -1,7 +1,7 @@
 # dreamer
 梦想家
 
-PHP，模板，js，CSS，sql，加起来只有1k+行代码，显示了我高超的工程技巧。
+PHP，模板，js，CSS，sql，加起来只有 1422 行代码，显示了我高超的工程技巧。
 
 ```
 $ wc -l *.php action/* logic/* assets/main.* *.sql view/*
