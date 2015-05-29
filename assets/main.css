@@ -11,18 +11,18 @@ a {
 	color: #444;
 }
 header {
-	height: 50px;
 	margin-bottom: 10px;
 	background-color: rgb(83, 189, 208);
 	padding: 20px;
+	padding-bottom: 33px;
 	color: #fff;
 }
 header a {
 	color: #fff;
 }
 header h1 {
-	float: left;
 	margin: 0;
+	text-align: right;
 }
 header h1 a {
 	text-decoration: none;
@@ -49,24 +49,40 @@ footer {
 }
 
 .control-bar {
-	float: right;
 }
 .thread-detail-info {
 	font-size: small;
 	color: grey;
 }
 .right-bar {
-	padding: 5px;
-	width: 311px;
-	float: right;
+	display: none;
 	clear: both;
-	margin-top: 6px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background-color: rgba(0,0,0,0.3);
+	overflow: scroll;
+}
+.right-bar>div {
+	width: 80%;
+	box-sizing: border-box;
+	margin-top: 0;
+	margin-bottom: 0;
+	border-radius: 0;
+	background-color: #fff;
+}
+.right-bar .float-paper .title {
+	border-radius: 0;
+}
+.right-bar .float-paper .body {
+	margin-bottom: 0;
 }
 
 #NodeNav{
-	width: 70%;
+	width: 90%;
 	margin: auto;
-	margin-top: -40px;
+	margin-top: -29px;
 }
 .node-navbar-main{
 	background-color: #6B8284;
@@ -97,7 +113,7 @@ footer {
 	border-color: #fff;
 }
 .index-search {
-	padding: 2px 157px;
+	padding: 2px 0;
 }
 .append-info{
 	border-top: 1px solid #bbb;
@@ -113,7 +129,6 @@ footer {
 }
 #MainList {
 	margin: 10px;
-	margin-right: 337px;
 }
 .thread-item:last-child {
 	border-bottom: 0px solid;
@@ -198,7 +213,6 @@ table.status .label-desc {
 }
 #NodeAll {
 	margin: 10px;
-	margin-right: 337px;
 }
 #NodeAll .title-desc {
 	font-size: small;
@@ -272,4 +286,44 @@ form.paper textarea{
 
 #CountThread {
 	float: right;
+}
+
+@media screen and (min-width: 900px) {
+header {
+	height: 50px;
+	margin-bottom: 10px;
+	background-color: rgb(83, 189, 208);
+	padding: 20px;
+	color: #fff;
+}
+header h1 {
+	float: left;
+	margin: 0;
+}
+.index-search {
+	padding: 2px 157px;
+}
+.right-bar {
+	padding: 5px;
+	width: 311px;
+	float: right;
+	clear: both;
+	margin-top: 6px;
+}
+#MainList {
+	margin: 10px;
+	margin-right: 337px;
+}
+#NodeAll {
+	margin: 10px;
+	margin-right: 337px;
+}
+.control-bar {
+	float: right;
+}
+#NodeNav{
+	width: 70%;
+	margin: auto;
+	margin-top: -40px;
+}
 }

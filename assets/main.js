@@ -22,6 +22,13 @@ $(function () {
 			}
 		}
 	})
+	var $RB = $('.right-bar');
+	var toggleFunc = function () {
+		$RB.toggle('fast');
+	};
+	$('#MenuBtn').click(toggleFunc)
+	$RB.click(toggleFunc)
+
 });
 function ajax_form(form, callback)
 {
