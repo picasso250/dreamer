@@ -54,6 +54,7 @@ footer {
 	font-size: small;
 	color: grey;
 }
+@media screen and (max-width: 900px) {
 .right-bar {
 	display: none;
 	clear: both;
@@ -77,6 +78,7 @@ footer {
 }
 .right-bar .float-paper .body {
 	margin-bottom: 0;
+}
 }
 
 #NodeNav{
@@ -304,6 +306,7 @@ header h1 {
 	padding: 2px 157px;
 }
 .right-bar {
+	background-color: rgba(0,0,0,0);
 	padding: 5px;
 	width: 311px;
 	float: right;
@@ -325,5 +328,8 @@ header h1 {
 	width: 70%;
 	margin: auto;
 	margin-top: -40px;
+}
+#MenuBtn{
+	display: none;
 }
 }
