@@ -135,6 +135,12 @@ header h1 {
 	padding: 0;
 	margin: 0;
 }
+li.line:last-child {
+	border-bottom: 0px solid;
+}
+li.line {
+	border-bottom: 1px solid #ccc;
+}
 #MainList {
 	margin: 10px;
 }
@@ -294,6 +300,16 @@ form.paper textarea, form.body textarea{
 	float: right;
 }
 #NodeDetail {
+	float: right;
+}
+.user-comment-item{
+	padding: 10px;
+}
+.user-comment-item .detail{
+	font-size: small;
+	margin-bottom: 10px;
+}
+.user-comment-item .time{
 	float: right;
 }
 
