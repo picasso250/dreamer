@@ -1,10 +1,25 @@
-<h3><?= $user['name'] ?></h3>
-<div>
-加入于 <?= $user['create_time'] ?>
+<div class="paper simple">
+	<h3><?= $user['name'] ?></h3>
+	<div>
+	加入于 <?= $user['create_time'] ?>
+	</div>
+	<?php if (user_id() == $user['id']): ?>
+		<div>
+			业力: <?= $user['karma'] ?>
+		</div>
+	<?php endif ?>
+	<div>
+		被赞同 <?= $user['vote_count'] ?>
+	</div>
+	<div>
+		被收藏 <?= $user['fav_count'] ?>
+	</div>
 </div>
 
-<h4><?= $user['name'] ?>
-	创建的所有主题</h4>
-<ul id="MainList">
-<?php include 'thread_list.html' ?>
-</ul>
+<div class="paper split">
+	<h4 class="title"><?= $user['name'] ?>
+		创建的所有主题</h4>
+	<ul class="body">
+	<?php include 'thread_list.html' ?>
+	</ul>
+</div>

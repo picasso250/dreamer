@@ -61,3 +61,12 @@ CREATE TABLE `vote` (
   `attitude` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `dreamer`.`user` 
+ADD COLUMN `karma` INT UNSIGNED NOT NULL AFTER `password`;
+ALTER TABLE `dreamer`.`user` 
+ADD COLUMN `vote_count` INT UNSIGNED NOT NULL AFTER `karma`,
+ADD COLUMN `fav_count` INT UNSIGNED NOT NULL AFTER `vote_count`;
+ALTER TABLE `dreamer`.`vote` 
+CHANGE COLUMN `attitude` `attitude` TINYINT(4) NOT NULL COMMENT '1/-1 赞或不赞' ;
+ALTER TABLE `dreamer`.`vote` 
+CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL ;

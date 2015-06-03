@@ -127,30 +127,40 @@ function post_new()
     }
     render(compact('nodes', 'node_id', 'node'));
 }
-function vote_thread($t_id)
+function vote_thread($tid)
 {
     global $db;
+    global $user;
     if (empty($_POST['value'])) {
         return echo_json(1, 'no value');
     }
     $value = $_POST['value'];
     $user_id = user_id();
-    $vote = $db->get_vote_by_user_id_and_attitude($user_id, $value);
-    if ($vote) {
+    $vote = $db->get_vote_by_user_id_and_tid($user_id, $tid);
+    if ($vote && $vote['value'] == $value) {
         return echo_json(1, 'u have vote');
     }
-    $db->insert('vote', [
-        'user_id' => user_id(),
-        't_id' => $t_id,
-        'attitude' => $value,
-    ]);
+    $data = ['attitude' => $value,];
+    $where = compact('tid', 'user_id');
+    if ($vote) {
+        $db->update('vote', $data, $where);
+    } else {
+        // 因臧否他人而增加业力
+        $db->update('user', ["karma=karma+1"], compact('user_id'));
+        $db->insert('vote', array_merge($data, $where));
+    }
     $map = [
         1 => 'vote_for',
         -1 => 'vote_against',
     ];
     $field = $map[$value];
     $num = $db->count_vote_by_user_id_and_attitude($user_id, $value);
-    $db->update('thread', [$field => $num], ['id' => $t_id]);
+    $db->update('thread', [$field => $num], ['id' => $tid]);
+    if ($value == 1) {
+        $user_id = $db->get_thread_by_id($tid)['user_id'];
+        $where = ['user_id' => $user_id];
+        $db->update('user', ['vote_count=vote_count+1'], $where);
+    }
     echo_json(compact('num'));
 }
 function node($id)
