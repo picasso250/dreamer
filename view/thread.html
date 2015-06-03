@@ -39,9 +39,11 @@
 				人收藏
 			</span>
 		<?php endif ?>
+		<?php if (user_id()): ?>
 		·
 		<button id="FavBtn" data-value="<?= 1 - $is_my_fav ?>">
 			<?= $fav_text_map[$is_my_fav] ?></button>
+		<?php endif ?>
 		<?php if ($thread['user_id'] == user_id()): ?>
 			·
 			<a href="/append/<?= $thread['id'] ?>">Append</a>
