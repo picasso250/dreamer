@@ -123,7 +123,13 @@ function user($id)
     global $db;
     $user = $db->get_user_by_id($id);
     $list = _all_thread("where t.user_id=?", [$id]);
-    render(compact('user', 'list'));
+    $sql = "SELECT c.*, u.name username, u.email, t.title, t.user_id tuid
+            from comment c
+            inner join thread t on t.id=c.tid 
+            inner join user u on t.user_id=u.id 
+            where c.user_id=?";
+    $comments = $db->queryAll($sql, [$id]);
+    render(compact('user', 'list', 'comments'));
 }
 function setting()
 {
