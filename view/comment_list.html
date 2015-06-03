@@ -3,6 +3,10 @@
 		<div class="detail-info">
 			<a href="/user/<?= $comment['user_id'] ?>"><?= (user_show_name($comment)) ?></a>
 			<?= $comment['create_time'] ?>
+			<?php if ($comment['device']): ?>
+				来自
+				<?= $GLOBALS['devices'][$comment['device']] ?>
+			<?php endif ?>
 		</div>
 		<div class="comment-content"><?= nl2br(htmlspecialchars($comment['content'])) ?></div>
 	</li>

@@ -158,3 +158,13 @@ function update_user_by_tid($tid, $update)
     $where = ['id' => $user_id];
     $db->update('user', [$update], $where);
 }
+function get_device()
+{
+    global $devices;
+    foreach ($devices as $i => $d) {
+        if (strpos($_SERVER['HTTP_USER_AGENT'], $d) !== false) {
+            return [$i, $d];
+        }
+    }
+    return [0, ''];
+}

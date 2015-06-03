@@ -36,4 +36,11 @@ if (in_array($router, $login_check_router_list) && !$user_id) {
     die("u need login");
 }
 
+$devices = [
+    1 => 'Sony',
+    2 => 'iPhone',
+    3 => 'Nexus',
+    4 => 'iPad'
+];
+
 run($router, $args);

@@ -102,6 +102,8 @@ function post_comment($tid)
     $content = $_POST['content'];
     $data = compact('tid', 'content');
     $data['user_id'] = user_id();
+    list($device, $_) = get_device();
+    $data['device'] = $device;
     $id = $db->insert('comment', $data);
     $sql = 'UPDATE thread set 
             comment_count=comment_count+1,
@@ -109,8 +111,8 @@ function post_comment($tid)
             action_time=?
             where id=?';
     $db->execute($sql, [$db::timestamp(), $tid]);
-    $id = $db->update('user', ['karma=karma+2'], ['id' => user_id()]);
-    return \echo_json(compact('id'));
+    $db->update('user', ['karma=karma+2'], ['id' => user_id()]);
+    return \echo_json([]);
 }
 function comment_list($tid)
 {

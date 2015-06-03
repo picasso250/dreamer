@@ -76,3 +76,5 @@ ALTER TABLE `dreamer`.`comment`
 CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL AFTER `id`;
 ALTER TABLE `dreamer`.`append` 
 CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL AFTER `id`;
+ALTER TABLE `dreamer`.`comment` 
+ADD COLUMN `device` TINYINT UNSIGNED NOT NULL AFTER `create_time`;
