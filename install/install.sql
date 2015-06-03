@@ -70,3 +70,9 @@ ALTER TABLE `dreamer`.`vote`
 CHANGE COLUMN `attitude` `attitude` TINYINT(4) NOT NULL COMMENT '1/-1 赞或不赞' ;
 ALTER TABLE `dreamer`.`vote` 
 CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL ;
+ALTER TABLE `dreamer`.`fav` 
+CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL ;
+ALTER TABLE `dreamer`.`comment` 
+CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL AFTER `id`;
+ALTER TABLE `dreamer`.`append` 
+CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL AFTER `id`;

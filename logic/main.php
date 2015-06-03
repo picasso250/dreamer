@@ -29,13 +29,13 @@ function get_thread($id)
             WHERE t.id=? limit 1";
     return $thread = $db->queryRow($sql, [$id]);
 }
-function all_comment($t_id)
+function all_comment($tid)
 {
     global $db;
     $sql = "SELECT c.*,u.name username, u.email 
             from comment c inner join user u on u.id=c.user_id 
-            where c.t_id=?";
-    return $comments = $db->queryAll($sql, [$t_id]);
+            where c.tid=?";
+    return $comments = $db->queryAll($sql, [$tid]);
 }
 function send_mail($to, $subject, $body, $AltBody = null) {
     global $config;

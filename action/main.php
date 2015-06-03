@@ -62,31 +62,31 @@ function thread($id)
     $thread = get_thread($id);
     $comments = all_comment($id);
     visit_thread($id);
-    $sql = "SELECT * from append where t_id=? order by id asc";
+    $sql = "SELECT * from append where tid=? order by id asc";
     $appends = $db->queryAll($sql, [$id]);
     $votes = $db->all_vote_by_user_id_and_tid(user_id(), $id);
     $my_votes = [];
     foreach ($votes as $vote) {
         $my_votes[$vote['attitude']] = $vote;
     }
-    $fav = $db->get_fav_by_user_id_and_t_id(user_id(), $id);
+    $fav = $db->get_fav_by_user_id_and_tid(user_id(), $id);
     $is_my_fav = $fav ? (1 - $fav['is_delete']) : 0;
     $fav_text_map = ['加入收藏', '取消收藏'];
-    $fav_count = $db->count_fav_by_t_id($id);
+    $fav_count = $db->count_fav_by_tid($id);
     $data = compact(
         'thread', 'comments',
         'my_votes', 'is_my_fav', 'fav_text_map', 'fav_count',
         'appends');
     render($data);
 }
-function post_comment($t_id)
+function post_comment($tid)
 {
     global $db;
     if (empty($_POST['content'])) {
         return \echo_json(1, 'empty content');
     }
     $content = $_POST['content'];
-    $data = compact('t_id', 'content');
+    $data = compact('tid', 'content');
     $data['user_id'] = user_id();
     $id = $db->insert('comment', $data);
     $sql = 'UPDATE thread set 
@@ -94,12 +94,12 @@ function post_comment($t_id)
             hot=hot+10,
             action_time=?
             where id=?';
-    $db->execute($sql, [$db::timestamp(), $t_id]);
+    $db->execute($sql, [$db::timestamp(), $tid]);
     return \echo_json(compact('id'));
 }
-function comment_list($t_id)
+function comment_list($tid)
 {
-    $comments = all_comment($t_id);
+    $comments = all_comment($tid);
     include 'view/comment_list.html';
 }
 
@@ -181,23 +181,23 @@ function search()
         ]);
     header("Location:$Location");
 }
-function fav_thread($t_id)
+function fav_thread($tid)
 {
     global $db;
     $user_id = user_id();
-    $fav = $db->get_fav_by_user_id_and_t_id($user_id, $t_id);
+    $fav = $db->get_fav_by_user_id_and_tid($user_id, $tid);
     $action = filter_input(INPUT_POST, 'value', FILTER_VALIDATE_BOOLEAN);
     if ($action) {
         if ($fav) {
-            $db->update('fav', ['is_delete' => 0], compact('t_id'));
+            $db->update('fav', ['is_delete' => 0], compact('tid'));
         } else {
-            $data = compact('user_id', 't_id');
+            $data = compact('user_id', 'tid');
             $db->insert('fav', $data);
         }
         $hot = "hot=hot+100";
     } else {
         if ($fav) {
-            $db->update('fav', ['is_delete' => 1], compact('t_id'));
+            $db->update('fav', ['is_delete' => 1], compact('tid'));
         } else {
             return echo_json(1, 'u do not have fav it');
         }
@@ -207,38 +207,39 @@ function fav_thread($t_id)
         'action_time' => $db::timestamp(),
         $hot,
     ];
-    $db->update('thread', $data, ['id' => $t_id]);
+    $db->update('thread', $data, ['id' => $tid]);
+    update_user_by_tid($tid, 'fav_count=fav_count+1');
     echo_json(0);
 }
 function fav()
 {
     global $db;
     $user_id = user_id();
-    $list = _all_thread("INNER JOIN fav f ON f.t_id=t.id
-            where f.user_id=?
-            order by f.id desc limit 111", [$user_id]);
+    $list = _all_thread("INNER JOIN fav f ON f.tid=t.id
+            WHERE f.user_id=? AND f.is_delete=0
+            ORDER BY f.id DESC LIMIT 111", [$user_id]);
     render(compact('list'));
 }
 
-function append($t_id)
+function append($tid)
 {
     global $db;
-    $thread = $db->get_thread_by_id($t_id);
-    render(compact('t_id', 'thread'));
+    $thread = $db->get_thread_by_id($tid);
+    render(compact('tid', 'thread'));
 }
-function append_thread($t_id)
+function append_thread($tid)
 {
     global $db;
     if (empty($_POST['append'])) {
         return echo_json(1, 'u do not have to append empty');
     }
     $content = $_POST['append'];
-    $thread = $db->get_thread_by_id($t_id);
+    $thread = $db->get_thread_by_id($tid);
     $user_id = user_id();
     if ($thread['user_id'] != $user_id) {
-        error_log("user $user_id modify thread $t_id, not his");
+        error_log("user $user_id modify thread $tid, not his");
         return echo_json(1, 'u cannot modify others');
     }
-    $id = $db->insert('append', compact('content', 't_id'));
-    echo_json(['url' => "/thread/$t_id"]);
+    $id = $db->insert('append', compact('content', 'tid'));
+    echo_json(['url' => "/thread/$tid"]);
 }
