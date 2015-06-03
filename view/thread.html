@@ -4,6 +4,9 @@
 	<h3><?= htmlspecialchars($thread['title']) ?></h3>
 	<div class="detail-info">
 		<button class="vote-btn" id="VoteForBtn" data-value="1"
+			<?php if (!user_id()): ?>
+				disabled
+			<?php endif ?>
 			<?php if (isset($my_votes[1])): ?>
 				disabled
 				title="u have vote"
@@ -12,12 +15,14 @@
 			赞
 			<span><?= $thread['vote_for'] ?></span>
 		</button>
+		<?php if (user_id()): ?>
 		<button class="vote-btn" id="VoteAgainstBtn" data-value="-1"
 			<?php if (isset($my_votes[-1])): ?>
 				disabled
 				title="u have vote"
 			<?php endif ?>
 			>踩</button>
+		<?php endif ?>
 		·
 		<a href="/user/<?= $thread['user_id'] ?>"><?= $thread['username'] ?></a>
 		·
