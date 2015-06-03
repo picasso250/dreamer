@@ -3,11 +3,6 @@
 	<div>
 	加入于 <?= $user['create_time'] ?>
 	</div>
-	<?php if (user_id() == $user['id']): ?>
-		<div>
-			业力: <?= $user['karma'] ?>
-		</div>
-	<?php endif ?>
 	<div>
 		被赞同 <?= $user['vote_count'] ?>
 	</div>
