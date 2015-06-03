@@ -255,7 +255,9 @@ table.status .label-desc {
 }
 #CommentList li{
 	padding: 5px;
-	border-bottom: 1px solid #bbb;
+}
+#CommentForm {
+	border-top: 1px solid #bbb;
 }
 .comment-content {
 	padding: 5px;

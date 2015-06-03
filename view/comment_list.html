@@ -1,5 +1,5 @@
 <?php foreach ($comments as $i => $comment): ?>
-	<li>
+	<li class="line">
 		<div class="detail-info">
 			<a href="/user/<?= $comment['user_id'] ?>"><?= (user_show_name($comment)) ?></a>
 			<?= $comment['create_time'] ?>

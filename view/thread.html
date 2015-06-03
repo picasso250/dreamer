@@ -69,15 +69,17 @@
 <div id="CommentDiv" class="paper split">
 	<h3 class="title">评论</h3>
 	<div class="body">
-	<ul id="CommentList" class="no-list">
-	<?php include 'comment_list.html' ?>
-	</ul>
-		<form action="/post_comment/<?= $thread['id'] ?>">
+		<ul id="CommentList" class="no-list">
+		<?php include 'comment_list.html' ?>
+		</ul>
+		<?php if (user_id()): ?>
+		<form id="CommentForm" action="/post_comment/<?= $thread['id'] ?>">
 			<div class="form-msg"></div>
 			<textarea name="content" placeholder="有什么要说的？"></textarea>
 			<br>
 			<button type="submit">评论</button>
 		</form>
+		<?php endif ?>
 	</div>
 </div>
 
