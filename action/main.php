@@ -64,7 +64,7 @@ function thread($id)
     visit_thread($id);
     $sql = "SELECT * from append where t_id=? order by id asc";
     $appends = $db->queryAll($sql, [$id]);
-    $votes = $db->all_vote_by_user_id_and_t_id(user_id(), $id);
+    $votes = $db->all_vote_by_user_id_and_tid(user_id(), $id);
     $my_votes = [];
     foreach ($votes as $vote) {
         $my_votes[$vote['attitude']] = $vote;
@@ -137,7 +137,7 @@ function vote_thread($tid)
     $value = $_POST['value'];
     $user_id = user_id();
     $vote = $db->get_vote_by_user_id_and_tid($user_id, $tid);
-    if ($vote && $vote['value'] == $value) {
+    if ($vote && $vote['attitude'] == $value) {
         return echo_json(1, 'u have vote');
     }
     $data = ['attitude' => $value,];
@@ -146,7 +146,7 @@ function vote_thread($tid)
         $db->update('vote', $data, $where);
     } else {
         // 因臧否他人而增加业力
-        $db->update('user', ["karma=karma+1"], compact('user_id'));
+        $db->update('user', ["karma=karma+1"], ['id' => $user_id]);
         $db->insert('vote', array_merge($data, $where));
     }
     $map = [
@@ -158,7 +158,7 @@ function vote_thread($tid)
     $db->update('thread', [$field => $num], ['id' => $tid]);
     if ($value == 1) {
         $user_id = $db->get_thread_by_id($tid)['user_id'];
-        $where = ['user_id' => $user_id];
+        $where = ['id' => $user_id];
         $db->update('user', ['vote_count=vote_count+1'], $where);
     }
     echo_json(compact('num'));
