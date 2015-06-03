@@ -157,9 +157,7 @@ function vote_thread($tid)
     $num = $db->count_vote_by_user_id_and_attitude($user_id, $value);
     $db->update('thread', [$field => $num], ['id' => $tid]);
     if ($value == 1) {
-        $user_id = $db->get_thread_by_id($tid)['user_id'];
-        $where = ['id' => $user_id];
-        $db->update('user', ['vote_count=vote_count+1'], $where);
+        update_user_by_tid($tid, 'vote_count=vote_count+1');
     }
     echo_json(compact('num'));
 }
