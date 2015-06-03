@@ -19,6 +19,9 @@ function run($router, $args)
 {
     header('Content-Type: text/html; charset=utf-8');
     $func = "\\action\\$router";
+    if (!function_exists($func)) {
+        $func = "\\action\\page404";
+    }
     return call_user_func_array($func, $args);
 }
 function get_router()

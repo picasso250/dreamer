@@ -61,20 +61,20 @@ CREATE TABLE `vote` (
   `attitude` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE `dreamer`.`user` 
+ALTER TABLE `user` 
 ADD COLUMN `karma` INT UNSIGNED NOT NULL AFTER `password`;
-ALTER TABLE `dreamer`.`user` 
+ALTER TABLE `user` 
 ADD COLUMN `vote_count` INT UNSIGNED NOT NULL AFTER `karma`,
 ADD COLUMN `fav_count` INT UNSIGNED NOT NULL AFTER `vote_count`;
-ALTER TABLE `dreamer`.`vote` 
+ALTER TABLE `vote` 
 CHANGE COLUMN `attitude` `attitude` TINYINT(4) NOT NULL COMMENT '1/-1 赞或不赞' ;
-ALTER TABLE `dreamer`.`vote` 
+ALTER TABLE `vote` 
 CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL ;
-ALTER TABLE `dreamer`.`fav` 
+ALTER TABLE `fav` 
 CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL ;
-ALTER TABLE `dreamer`.`comment` 
+ALTER TABLE `comment` 
 CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL AFTER `id`;
-ALTER TABLE `dreamer`.`append` 
+ALTER TABLE `append` 
 CHANGE COLUMN `t_id` `tid` INT(10) UNSIGNED NOT NULL AFTER `id`;
-ALTER TABLE `dreamer`.`comment` 
+ALTER TABLE `comment` 
 ADD COLUMN `device` TINYINT UNSIGNED NOT NULL AFTER `create_time`;

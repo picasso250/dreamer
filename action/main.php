@@ -253,3 +253,8 @@ function append_thread($tid)
     $id = $db->insert('append', compact('content', 'tid'));
     echo_json(['url' => "/thread/$tid"]);
 }
+function page404()
+{
+    header('HTTP/1.1 404 Not Found');
+    echo 'no page';
+}
