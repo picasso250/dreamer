@@ -34,6 +34,19 @@ function thread_list()
     $list = \all_thread();
     include 'view/thread_list.html';
 }
+
+function post_new()
+{
+    global $db;
+    if (!empty($_GET['node'])) {
+        $node_id = $_GET['node'];
+        $node = $db->get_node_by_id($node_id);
+    } else {
+        $node_id = 0;
+        $nodes = $db->all_node(100);
+    }
+    render(compact('nodes', 'node_id', 'node'));
+}
 function post()
 {
     global $db;
@@ -53,6 +66,7 @@ function post()
         $data['root_node_id'] = 0;
     }
     $id = $db->insert('thread', $data);
+    $id = $db->update('user', ['karma=karma+2'], ['id' => user_id()]);
     return \echo_json(['url' => "/thread/$id"]);
 }
 
@@ -95,6 +109,7 @@ function post_comment($tid)
             action_time=?
             where id=?';
     $db->execute($sql, [$db::timestamp(), $tid]);
+    $id = $db->update('user', ['karma=karma+2'], ['id' => user_id()]);
     return \echo_json(compact('id'));
 }
 function comment_list($tid)
@@ -115,18 +130,6 @@ function setting()
     render();
 }
 
-function post_new()
-{
-    global $db;
-    if (!empty($_GET['node'])) {
-        $node_id = $_GET['node'];
-        $node = $db->get_node_by_id($node_id);
-    } else {
-        $node_id = 0;
-        $nodes = $db->all_node(100);
-    }
-    render(compact('nodes', 'node_id', 'node'));
-}
 function vote_thread($tid)
 {
     global $db;
