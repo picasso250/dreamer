@@ -153,6 +153,7 @@ function visit_thread($id)
 }
 function update_user_by_tid($tid, $update)
 {
+    global $db;
     $user_id = $db->get_thread_by_id($tid)['user_id'];
     $where = ['id' => $user_id];
     $db->update('user', [$update], $where);

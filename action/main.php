@@ -192,21 +192,22 @@ function fav_thread($tid)
             $data = compact('user_id', 'tid');
             $db->insert('fav', $data);
         }
-        $hot = "hot=hot+100";
     } else {
         if ($fav) {
             $db->update('fav', ['is_delete' => 1], compact('tid'));
         } else {
             return echo_json(1, 'u do not have fav it');
         }
-        $hot = "hot=hot-100";
     }
+    $map = ['-', '+'];
+    $iaction = intval($action);
+    $op = $map[$iaction];
     $data = [
         'action_time' => $db::timestamp(),
-        $hot,
+        "hot = hot $op 100",
     ];
     $db->update('thread', $data, ['id' => $tid]);
-    update_user_by_tid($tid, 'fav_count=fav_count+1');
+    update_user_by_tid($tid, "fav_count = fav_count $op 1");
     echo_json(0);
 }
 function fav()
