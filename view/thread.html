@@ -44,7 +44,8 @@
 	</div>
 </div>
 
-	<div id="ThreadContent"><?= nl2br(htmlspecialchars($thread['content'])) ?></div>
+	<div id="ThreadContent"><?= nl2br(
+					htmlspecialchars($thread['content'])) ?></div>
 	<?php foreach ($appends as $i => $append): ?>
 		<div class="append-info">
 			<div class="detail-info">
@@ -77,7 +78,7 @@
 $(function () {
 	ajax_form('form', function (ret) {
 		if (ret.code === 0) {
-			$('#MainList').load("/comment_list/<?= $thread['id'] ?>");
+			$('#CommentList').load("/comment_list/<?= $thread['id'] ?>");
 			$('input,textarea').val('');
 		}
 	})
